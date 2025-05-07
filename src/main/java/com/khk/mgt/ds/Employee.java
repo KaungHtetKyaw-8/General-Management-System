@@ -20,4 +20,10 @@ public class Employee extends Person{
 
     public Employee() {
     }
+
+    public Employee init(){
+        this.setAddress(new Address());
+        this.setDepartmentCategory(new DepartmentCategory());
+        return this;
+    }
 }

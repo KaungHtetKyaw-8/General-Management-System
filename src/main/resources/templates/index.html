@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header>
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="/custom/css/style.css">
+</header>
+
+<body>
+<!--<main th:insert="fragments/main.html :: main"></main>-->
+
+
+    <form th:action="@{/departments}" th:object="${departmentTableDto}" method="post">
+        <div class="row">
+            <div class="col-2">
+                <button class="btn btn-dark" type="submit" name="addRow">Add Row</button>
+                <button class="btn btn-dark" type="submit" name="submit">Submit</button>
+            </div>
+            <div class="col-12">
+                <table  class="table-style">
+                    <thead>
+                    <tr>
+                        <th th:each="head : *{header}" th:text="${head}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="*{data == null or data.isEmpty()}">
+                        <td>No Data</td>
+                    </tr>
+
+                    <tr th:each="dataItem,dataStat : *{data}">
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].firstName}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].lastName}"></td>
+                        <td><input type="date" th:field="*{data[__${dataStat.index}__].dateOfBirth}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].gender}"></td>
+                        <td><input type="email" th:field="*{data[__${dataStat.index}__].email}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].phone}"></td>
+
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.countryCode}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.city}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.street}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.apartment}"></td>
+
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].departmentCategory.departmentName}"></td>
+
+                        <td><input type="date" th:field="*{data[__${dataStat.index}__].employmentDate}"></td>
+                        <td><input type="text" th:field="*{data[__${dataStat.index}__].employmentType}"></td>
+                        <td><input type="number" th:field="*{data[__${dataStat.index}__].salary}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+body{
+    --table-header-bg-color : #333;
+    --table-header-text-color : #eee;
+    --table-data-color :#ccc;
+}
+
+.table-style{
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+.table-style,.table-style th,.table-style td {
+    border: 1px solid black;
+    padding: 3px 5px;
+}
+
+.table-style th{
+    background: var(--table-header-bg-color);
+    color: var(--table-header-text-color);
+}
+
+.table-style tr:nth-child(even) td{
+    background: var(--table-data-color);
+}
+
+.table-style tr td input{
+    border: none;
+    outline: none;
+}

@@ -14,7 +14,7 @@ public class Address {
     private String apartment;
     private String street;
     private String city;
-    private String cuntry;
+    private String countryCode;
 
     public Address() {
     }

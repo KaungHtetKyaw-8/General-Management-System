@@ -2,6 +2,7 @@ package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
 
@@ -16,6 +17,7 @@ public abstract class Person{
 
     private String firstName;
     private String lastName;
+    private String gender;
     private Date dateOfBirth;
     private String email;
     private String phone;

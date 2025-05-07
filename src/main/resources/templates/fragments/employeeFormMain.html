@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="employeeFormMain">
+  <!--Employee Register Form Done-->
+  <div class="container-fluid bg-dark text-light vh-100" >
+    <form th:action="@{/employees}" th:object="${employeeData}" method="post">
+      <h2 class="text-center py-sm-5">Registration</h2>
+      <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
+        <div th:insert="~{fragments/personalInfoForm.html :: personalInfoForm}" class="col-11 col-md-10 col-lg-8 form-step active"></div>
+        <div th:insert="~{fragments/addressInfoForm.html :: addressInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>
+        <div th:insert="~{fragments/employeeInfoForm.html :: employeeInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+</body>
+</html>

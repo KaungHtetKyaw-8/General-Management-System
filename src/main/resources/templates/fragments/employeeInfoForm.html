@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Employment Info-->
+<div th:fragment="employeeInfoForm">
+  <h5 class="my-2 text-center">Employment Info</h5>
+  <div class="row row-cols-1 row-cols-md-2">
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label for="employmentDate" class="form-label">Employment Date</label>
+        <input type="date" class="form-control" id="employmentDate" th:name="${'data.employmentDate'}"  required>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label for="employmentType" class="form-label">Employment Type</label>
+        <input type="text" class="form-control suggest-input-null" id="employmentType" th:name="${'data.employmentType'}"  placeholder="Employment Type"
+               data-url=""
+               data-target="#employmentTypeSuggest"
+               data-renderer="departmentRenderer"
+               data-fetcher="departmentFetcher"
+               data-fetcherConfig="no-repeat"
+        >
+        <ul class="list-group position-absolute shadow d-none" id="employmentTypeSuggest"></ul>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label for="departmentName" class="form-label">Department Name</label>
+        <input type="text" class="form-control suggest-input-null" id="departmentName" th:name="${'data.departmentCategory.departmentName'}" placeholder="Department Name"
+               data-url=""
+               data-target="#departmentSuggest"
+               data-renderer="departmentRenderer"
+               data-fetcher="departmentFetcher"
+               data-fetcherConfig="no-repeat"
+        >
+        <ul class="list-group position-absolute shadow d-none" id="departmentSuggest"></ul>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label for="salary" class="form-label">Salary</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" class="form-control" placeholder="Salary" id="salary" th:name="${'data.salary'}"   required>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button class="btn btn-primary form-prev-btn">Previous</button>
+    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>

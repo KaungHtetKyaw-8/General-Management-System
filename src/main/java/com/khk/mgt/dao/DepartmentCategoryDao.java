@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepartmentCategoryDao extends JpaRepository<DepartmentCategory, Integer> {
+
+    public DepartmentCategory findByDepartmentName(String name);
+
 }

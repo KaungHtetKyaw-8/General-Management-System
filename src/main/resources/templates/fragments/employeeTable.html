@@ -4,7 +4,7 @@
 <body>
 
 <div th:fragment="employeeTable">
-  <form th:action="@{/employees}" th:object="${employeeTableData}" method="post">
+  <form th:action="@{/employees}" th:object="${employeeData}" method="post">
     <table  class="table-style">
       <thead>
       <tr>
@@ -12,27 +12,27 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:if="*{data == null or data.isEmpty()}">
+      <tr th:if="*{listData == null or listData.isEmpty()}">
         <td>No Data</td>
       </tr>
 
-      <tr th:each="dataItem,dataStat : *{data}">
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].firstName}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].lastName}"></td>
-        <td><input type="date" th:field="*{data[__${dataStat.index}__].dateOfBirth}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].gender}"></td>
-        <td><input type="email" th:field="*{data[__${dataStat.index}__].email}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].phone}"></td>
+      <tr th:each="dataItem,dataStat : *{listData}">
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].firstName}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].lastName}"></td>
+        <td><input type="date" th:field="*{listData[__${dataStat.index}__].dateOfBirth}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].gender}"></td>
+        <td><input type="email" th:field="*{listData[__${dataStat.index}__].email}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].phone}"></td>
 
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.countryCode}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.city}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.street}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].address.apartment}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].address.countryCode}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].address.city}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].address.street}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].address.apartment}"></td>
 
-        <td><input type="date" th:field="*{data[__${dataStat.index}__].employmentDate}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].employmentType}"></td>
-        <td><input type="text" th:field="*{data[__${dataStat.index}__].departmentCategory.departmentName}"></td>
-        <td><input type="number" th:field="*{data[__${dataStat.index}__].salary}"></td>
+        <td><input type="date" th:field="*{listData[__${dataStat.index}__].employmentDate}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].employmentType}"></td>
+        <td><input type="text" th:field="*{listData[__${dataStat.index}__].departmentCategory.departmentName}"></td>
+        <td><input type="number" th:field="*{listData[__${dataStat.index}__].salary}"></td>
       </tr>
       </tbody>
     </table>

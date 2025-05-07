@@ -1,3 +1,18 @@
+/* Form Slide */
+.form-step {
+    display: none;
+}
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+
+
 body{
     --table-header-bg-color : #333;
     --table-header-text-color : #eee;
@@ -11,12 +26,12 @@ body{
 
 .table-style,.table-style th,.table-style td {
     border: 1px solid black;
-    padding: 3px 5px;
 }
 
 .table-style th{
     background: var(--table-header-bg-color);
     color: var(--table-header-text-color);
+    padding: 3px 5px;
 }
 
 .table-style tr:nth-child(even) td{
@@ -24,6 +39,11 @@ body{
 }
 
 .table-style tr td input{
+    padding: 5px 3px;
     border: none;
     outline: none;
+}
+
+.form-control:focus{
+    box-shadow: none;
 }

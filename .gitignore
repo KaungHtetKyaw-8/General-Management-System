@@ -19,6 +19,7 @@ target/
 *.iml
 *.ipr
 src/main/resources/static/bootstrap5
+src/main/resources/templates/Test
 
 ### NetBeans ###
 /nbproject/private/

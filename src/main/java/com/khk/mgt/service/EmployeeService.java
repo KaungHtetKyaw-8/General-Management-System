@@ -1,6 +1,8 @@
 package com.khk.mgt.service;
 
+import com.khk.mgt.dao.DepartmentCategoryDao;
 import com.khk.mgt.dao.EmployeeDao;
+import com.khk.mgt.ds.DepartmentCategory;
 import com.khk.mgt.ds.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
+    @Autowired
+    private DepartmentCategoryDao departmentCategoryDao;
+
     public List<Employee> getAllEmployees() {
         return new ArrayList<>(employeeDao.findAll());
     }
@@ -26,6 +31,8 @@ public class EmployeeService {
     }
 
     public void saveEmployee(Employee employee) {
+        DepartmentCategory dep = departmentCategoryDao.findByDepartmentName(employee.getDepartmentCategory().getDepartmentName());
+        employee.setDepartmentCategory(dep);
         employeeDao.save(employee);
     }
 

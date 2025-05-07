@@ -1,7 +1,7 @@
 package com.khk.mgt.controller;
 
 import com.khk.mgt.ds.Employee;
-import com.khk.mgt.dto.EmployeeTableDto;
+import com.khk.mgt.dto.EmployeeDto;
 import com.khk.mgt.dto.TableHeaderList;
 import com.khk.mgt.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -26,33 +26,41 @@ public class EmployeeController {
 
     @GetMapping
     public String index(Model model) {
-        EmployeeTableDto employeeTableDto = new EmployeeTableDto();
-        employeeTableDto.setHeader(getCombinedHeaders());
+        EmployeeDto employeeData = new EmployeeDto();
+        employeeData.setHeader(getCombinedHeaders());
 
-        model.addAttribute("employeeTableData", employeeTableDto);
-        return "index";
+        model.addAttribute("employeeData", employeeData);
+        return "employeeIndex";
     }
 
     @PostMapping(params = "addRow")
-    public String addRow(@Valid @ModelAttribute("employeeTableData") EmployeeTableDto employeeTableDto, BindingResult bindingResult,Model model) {
+    public String addRow(@Valid @ModelAttribute("employeeData") EmployeeDto employeeData, BindingResult bindingResult, Model model) {
+        System.out.println("Row Add Process is working");
         if (bindingResult.hasErrors()) {
             System.out.println("Return Value Empty");
-            return "index";
+            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
+            return "employeeIndex";
         } else {
-            employeeTableDto.getData().add(new Employee().init());
-            employeeTableDto.setHeader(getCombinedHeaders());
+            employeeData.getListData().add(new Employee().init());
+            employeeData.setHeader(getCombinedHeaders());
 
-            model.addAttribute("employeeTableData", employeeTableDto);
-            return "index";
+            System.out.println("Employee Data : " + employeeData.getListData());
+
+            model.addAttribute("employeeData", employeeData);
+            return "employeeIndex";
         }
     }
 
     @PostMapping(params = "submit")
-    public String submit(@Valid @ModelAttribute("employeeTableData") EmployeeTableDto employeeTableDto, Model model) {
+    public String submit(@Valid @ModelAttribute("employeeData") EmployeeDto employeeDto,BindingResult bindingResult, Model model) {
+        System.out.println("Submit Process is working");
+        if (bindingResult.hasErrors()) {
+            System.out.println("Return Value Empty");
+        }
         // process the form submission
-        System.out.println("Submitted: " + employeeTableDto.getData());
-        employeeService.saveEmployees(employeeTableDto.getData());
-        return "redirect:/";
+        System.out.println("Submitted: " + employeeDto.getData().toString());
+        employeeService.saveEmployee(employeeDto.getData());
+        return "redirect:/employees";
     }
 
     private List<String> getCombinedHeaders() {

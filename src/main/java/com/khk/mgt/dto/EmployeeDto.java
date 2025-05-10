@@ -1,27 +1,49 @@
 package com.khk.mgt.dto;
 
-import com.khk.mgt.ds.Employee;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
-@SessionScope
-public class EmployeeDto extends TableHeaderDto{
 
-    private List<Employee> listData;
+public class EmployeeDto extends PersonDto {
 
-    private Employee data;
+    @NotNull(message = "EmploymentDate must not blank.")
+    @FutureOrPresent
+    private Date employmentDate;
+
+    @NotBlank(message = "EmploymentType must not blank.")
+    private String employmentType;
+
+    @NotBlank(message = "DepartmentName must not blank.")
+    private String departmentName;
+
+    @NotNull(message = "Salary must not blank.")
+    @DecimalMin(value = "0.0",message = "Salary must not negative value.")
+    private double salary;
 
     public EmployeeDto() {
         super();
-        this.listData = new ArrayList<Employee>();
-        this.data = new Employee().init();
+        setAddress(new AddressDto());
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDto{" +
+                "firstname=" + getFirstName() +
+                "lastname=" + getLastName() +
+                "gender=" + getGender() +
+                "email=" + getEmail() +
+                "address=" + getAddress() +
+                "employmentDate=" + employmentDate +
+                ", employmentType='" + employmentType + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }

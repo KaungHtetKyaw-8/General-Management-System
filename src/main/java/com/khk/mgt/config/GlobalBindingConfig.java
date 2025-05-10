@@ -1,4 +1,4 @@
-package com.khk.mgt.controller;
+package com.khk.mgt.config;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;

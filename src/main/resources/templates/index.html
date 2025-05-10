@@ -12,7 +12,17 @@
 <body>
 
 <div th:insert="~{fragments/employeeTable.html :: employeeTable}"></div>
+<div>
+    <form action="#" th:object="${employeeDto}">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-6">
+                <input type="text" th:field="*{firstName}" placeholder="Department Name">
+                <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+            </div>
+        </div>
+    </form>
 
+</div>
 
 <!--<div>-->
 <!--    <form th:action="@{/department/add}" th:object="${departmentData}" method="post">-->

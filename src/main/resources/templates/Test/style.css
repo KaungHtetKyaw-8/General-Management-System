@@ -1,0 +1,118 @@
+.light-theme{
+	--primary-bg-color: #ededed;
+	--secondarly-bg-color: #b5b2b2;
+	--primary-table-color: #d8d8d8;
+	--secondary-table-color: #a5a5a5;
+	--primary-text-color: #1c1b1b;
+	--secondary-text-color: #232222;
+
+
+	--nav-hover-bd-color : #5d89ff;
+}
+
+.dark-theme{
+	--bg-color : var();
+	--primary-bg-color : #070d22;
+	--secondarly-bg-color : #1c1c2b;
+	--primary-table-color: #0d1a1b;
+	--secondary-table-color: #22343e;
+	--primary-text-color : #ede7e7;
+	--secondary-text-color : #a5a0a0;
+
+
+	--nav-hover-bd-color : #222849;
+}
+
+body {
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	background: var(--primary-bg-color);
+	color: var(--primary-text-color);
+}
+
+.primary-background{
+	background-color: var(--primary-bg-color);
+	color: var(--primary-text-color);
+}
+
+.secondary-background{
+	background-color: var(--secondarly-bg-color);
+	color: var(--secondary-text-color);
+}
+
+
+.siderbar-toggler{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 2vh;
+	left: 2vh;
+	width: 50px;
+	height: 50px;
+	/*color: var(--primary-text-color);*/
+	/*background-color: rebeccapurple;*/
+}
+
+
+/**************/
+/* Form Slide */
+/**************/
+.form-step {
+	display: none;
+}
+
+.form-step.active {
+	display: block;
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateX(20px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+.form-control:focus{
+	box-shadow: none;
+}
+
+
+/* Content Body */
+.content-body{
+	margin-top : 10vh ;
+}
+
+
+
+/***************/
+/*Table Section*/
+/***************/
+.table-style{
+	border-collapse: collapse;
+	margin: 5px 0;
+}
+
+.table-style,.table-style th,.table-style td {
+	border: 1px solid var(--primary-text-color);
+}
+
+.table-style th{
+	background: var(--secondary-table-color);
+	color: var(--primary-text-color);
+	padding: 3px 5px;
+}
+
+.table-style tr:nth-child(even) td{
+	background: var(--secondary-table-color);
+}
+
+.table-style tr td input{
+	padding: 5px 3px;
+	border: none;
+	outline: none;
+}
+
+
+
+

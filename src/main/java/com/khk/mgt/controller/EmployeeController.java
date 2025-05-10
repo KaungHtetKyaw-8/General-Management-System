@@ -26,49 +26,37 @@ public class EmployeeController {
 
     @GetMapping
     public String index(Model model) {
-        EmployeeDto employeeData = new EmployeeDto();
-        employeeData.setHeader(getCombinedHeaders());
-
-        model.addAttribute("employeeData", employeeData);
+        model.addAttribute("employeeDto", new EmployeeDto());
+        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
         return "employeeIndex";
     }
 
     @PostMapping(params = "addRow")
-    public String addRow(@Valid @ModelAttribute("employeeData") EmployeeDto employeeData, BindingResult bindingResult, Model model) {
+    public String addRow(@Valid @ModelAttribute("employeeDtoList") List<EmployeeDto> employeeDtoList, BindingResult bindingResult, Model model) {
         System.out.println("Row Add Process is working");
         if (bindingResult.hasErrors()) {
-            System.out.println("Return Value Empty");
             System.out.println("Binding Errors : " + bindingResult.getAllErrors());
             return "employeeIndex";
         } else {
-            employeeData.getListData().add(new Employee().init());
-            employeeData.setHeader(getCombinedHeaders());
-
-            System.out.println("Employee Data : " + employeeData.getListData());
-
-            model.addAttribute("employeeData", employeeData);
+            employeeDtoList.add(new EmployeeDto());
+            System.out.println("Employee Data : " + employeeDtoList);
+            model.addAttribute("employeeDtoList", employeeDtoList);
             return "employeeIndex";
         }
     }
 
     @PostMapping(params = "submit")
-    public String submit(@Valid @ModelAttribute("employeeData") EmployeeDto employeeDto,BindingResult bindingResult, Model model) {
-        System.out.println("Submit Process is working");
+    public String submit(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            System.out.println("Return Value Empty");
+            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
+            System.out.println("Return Value : " + employeeDto);
+//            model.addAttribute("employeeDto", employeeDto);
+            return "employeeIndex";
+        }else{
+            // process the form submission
+            System.out.println("Submitted: " + employeeDto);
+//            employeeService.saveEmployee(employeeDto);
+            return "redirect:/employees";
         }
-        // process the form submission
-        System.out.println("Submitted: " + employeeDto.getData().toString());
-        employeeService.saveEmployee(employeeDto.getData());
-        return "redirect:/employees";
     }
-
-    private List<String> getCombinedHeaders() {
-        List<String> headers = new ArrayList<>();
-        headers.addAll(tableHeaderDto.getPersonHeader());
-        headers.addAll(tableHeaderDto.getAddressHeader());
-        headers.addAll(tableHeaderDto.getEmployeeHeader());
-        return headers;
-    }
-
 }

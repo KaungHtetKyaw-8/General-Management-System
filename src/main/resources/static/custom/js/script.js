@@ -93,7 +93,7 @@ const rendererMap = {
     },
     cityRenderer: (data, query, input, box) => {
 
-        const countryName = document.getElementById("country").value;
+        const countryName = document.getElementById("address.countryCode").value;
 
         if (countryName === null){
             console.error("Country Not Found [ID : country]",countryName)

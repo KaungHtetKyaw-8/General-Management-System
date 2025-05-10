@@ -1,15 +1,22 @@
 package com.khk.mgt.service;
 
-import com.khk.mgt.dao.DepartmentCategoryDao;
 import com.khk.mgt.dao.EmployeeDao;
-import com.khk.mgt.ds.DepartmentCategory;
 import com.khk.mgt.ds.Employee;
+import com.khk.mgt.dto.EmployeeDto;
+import com.khk.mgt.mapper.EmployeeMapper;
+import org.hibernate.query.Order;
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Limit;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,9 +26,6 @@ public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
-    @Autowired
-    private DepartmentCategoryDao departmentCategoryDao;
-
     public List<Employee> getAllEmployees() {
         return new ArrayList<>(employeeDao.findAll());
     }
@@ -30,14 +34,20 @@ public class EmployeeService {
         return employeeDao.findById(id).orElse(null);
     }
 
-    public void saveEmployee(Employee employee) {
-        DepartmentCategory dep = departmentCategoryDao.findByDepartmentName(employee.getDepartmentCategory().getDepartmentName());
-        employee.setDepartmentCategory(dep);
-        employeeDao.save(employee);
+    public void saveEmployee(EmployeeDto employee) {
+        employeeDao.save(EmployeeMapper.toEntity(employee));
     }
 
-    public void saveEmployees(List<Employee> employees) {
-        employeeDao.saveAll(employees);
+    public void saveEmployeeAll(List<EmployeeDto> employees) {
+        employeeDao.saveAll(employees.stream()
+                .map(EmployeeMapper::toEntity)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public List<String> suggestDepartmentName(String departmentName) {
+        Pageable top5 = PageRequest.of(0, 5);
+        return employeeDao.findSuggestionDepartmentNames(departmentName, top5);
     }
 
 

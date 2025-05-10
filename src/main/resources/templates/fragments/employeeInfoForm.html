@@ -9,15 +9,23 @@
   <div class="row row-cols-1 row-cols-md-2">
     <div class="col">
       <div class="mb-3 my-3">
-        <label for="employmentDate" class="form-label">Employment Date</label>
-        <input type="date" class="form-control" id="employmentDate" th:name="${'data.employmentDate'}"  required>
+        <label th:for="${employmentDate}" class="form-label">Employment Date</label>
+        <input type="date" class="form-control"
+               th:field="*{employmentDate}"
+               th:classappend="${#fields.hasErrors('employmentDate')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('employmentDate')}"
+             th:errors="*{employmentDate}">
+        </div>
       </div>
     </div>
 
     <div class="col">
       <div class="mb-3 my-3">
-        <label for="employmentType" class="form-label">Employment Type</label>
-        <input type="text" class="form-control suggest-input-null" id="employmentType" th:name="${'data.employmentType'}"  placeholder="Employment Type"
+        <label th:for="${employmentType}" class="form-label">Employment Type</label>
+        <input type="text" class="form-control suggest-input-null" placeholder="Employment Type"
+               th:field="*{employmentType}"
+               th:classappend="${#fields.hasErrors('employmentType')} ? 'form-control-invalid' : ''"
                data-url=""
                data-target="#employmentTypeSuggest"
                data-renderer="departmentRenderer"
@@ -25,13 +33,19 @@
                data-fetcherConfig="no-repeat"
         >
         <ul class="list-group position-absolute shadow d-none" id="employmentTypeSuggest"></ul>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('employmentType')}"
+             th:errors="*{employmentType}">
+        </div>
       </div>
     </div>
 
     <div class="col">
       <div class="mb-3 my-3">
-        <label for="departmentName" class="form-label">Department Name</label>
-        <input type="text" class="form-control suggest-input-null" id="departmentName" th:name="${'data.departmentCategory.departmentName'}" placeholder="Department Name"
+        <label th:for="${departmentName}" class="form-label">Department Name</label>
+        <input type="text" class="form-control suggest-input-null" placeholder="Department Name"
+               th:field="*{departmentName}"
+               th:classappend="${#fields.hasErrors('departmentName')} ? 'form-control-invalid' : ''"
                data-url=""
                data-target="#departmentSuggest"
                data-renderer="departmentRenderer"
@@ -39,23 +53,33 @@
                data-fetcherConfig="no-repeat"
         >
         <ul class="list-group position-absolute shadow d-none" id="departmentSuggest"></ul>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('departmentName')}"
+             th:errors="*{departmentName}">
+        </div>
       </div>
     </div>
 
     <div class="col">
       <div class="mb-3 my-3">
-        <label for="salary" class="form-label">Salary</label>
+        <label th:for="${salary}" class="form-label">Salary</label>
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input type="number" class="form-control" placeholder="Salary" id="salary" th:name="${'data.salary'}"   required>
+          <input type="number" class="form-control" placeholder="Salary"
+                 th:field="*{salary}"
+                 th:classappend="${#fields.hasErrors('salary')} ? 'form-control-invalid' : ''">
+          <div class="invalid-feedback"
+               th:if="${#fields.hasErrors('salary')}"
+               th:errors="*{salary}">
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <button class="btn btn-primary form-prev-btn">Previous</button>
-    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+    <button type="button" class="btn btn-primary form-prev-btn">Previous</button>
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   </div>
 </div>
 

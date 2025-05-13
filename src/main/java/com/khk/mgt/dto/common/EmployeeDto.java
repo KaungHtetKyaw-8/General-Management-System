@@ -1,12 +1,10 @@
-package com.khk.mgt.dto;
+package com.khk.mgt.dto.common;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Getter
 @Setter

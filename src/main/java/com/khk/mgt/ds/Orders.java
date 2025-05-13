@@ -3,6 +3,7 @@ package com.khk.mgt.ds;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Orders {
 
     @OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST)
     private List<SellDetail> sellDetail = new ArrayList<SellDetail>();
+
+    private Date orderDate;
 
     public Orders() {
     }

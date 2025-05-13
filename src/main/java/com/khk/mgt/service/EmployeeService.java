@@ -2,21 +2,16 @@ package com.khk.mgt.service;
 
 import com.khk.mgt.dao.EmployeeDao;
 import com.khk.mgt.ds.Employee;
-import com.khk.mgt.dto.EmployeeDto;
+import com.khk.mgt.dto.common.EmployeeDto;
 import com.khk.mgt.mapper.EmployeeMapper;
-import org.hibernate.query.Order;
-import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +43,11 @@ public class EmployeeService {
     public List<String> suggestDepartmentName(String departmentName) {
         Pageable top5 = PageRequest.of(0, 5);
         return employeeDao.findSuggestionDepartmentNames(departmentName, top5);
+    }
+
+    public List<String> suggestEmploymentType(String employmentType) {
+        Pageable top5 = PageRequest.of(0, 5);
+        return employeeDao.findSuggestionEmploymentType(employmentType, top5);
     }
 
 

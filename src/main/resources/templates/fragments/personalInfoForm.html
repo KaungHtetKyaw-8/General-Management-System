@@ -5,7 +5,7 @@
 
 <!--				Personal Form-->
 <div th:fragment="personalInfoForm">
-    <h5 class="my-2 text-center">Personal Info</h5>
+    <h5 class="my-2 text-center" th:text="#{header.person.sub}"></h5>
     <div class="row row-cols-1 row-cols-md-2">
         <div class="col">
             <div class="mb-3 my-3">
@@ -98,14 +98,18 @@
                            th:field="*{gender}"
                            th:value="#{value.person.gender.male}"
                            th:classappend="${#fields.hasErrors('gender')} ? 'form-check-input-invalid' : ''">
-                    <label th:for="${#ids.prev('gender')}" class="form-check-label">Male</label>
+                    <label th:for="${#ids.prev('gender')}"
+                           th:text="#{header.person.gender.male}"
+                           class="form-check-label"></label>
                 </div>
                 <div class="form-check">
                     <input type="radio" class="form-check-input"
                            th:field="*{gender}"
                            th:value="#{value.person.gender.female}"
                            th:classappend="${#fields.hasErrors('gender')} ? 'form-check-input-invalid' : ''">
-                    <label th:for="${#ids.prev('gender')}" class="form-check-label">Female</label>
+                    <label th:for="${#ids.prev('gender')}"
+                           th:text="#{header.person.gender.female}"
+                           class="form-check-label" ></label>
                 </div>
                 <div class="invalid-feedback"
                      th:if="${#fields.hasErrors('gender')}"

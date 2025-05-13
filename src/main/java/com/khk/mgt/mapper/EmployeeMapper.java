@@ -1,7 +1,7 @@
 package com.khk.mgt.mapper;
 
 import com.khk.mgt.ds.Employee;
-import com.khk.mgt.dto.EmployeeDto;
+import com.khk.mgt.dto.common.EmployeeDto;
 
 public class EmployeeMapper {
 

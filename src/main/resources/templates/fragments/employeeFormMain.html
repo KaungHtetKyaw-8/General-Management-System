@@ -6,8 +6,8 @@
 <div th:fragment="employeeFormMain">
   <!--Employee Register Form Done-->
   <div class="container-fluid text-light vh-100" >
-    <form th:action="@{/employees}" th:object="${employeeDto}" method="post">
-      <h2 class="text-center py-md-4 py-sm-5">Registration</h2>
+    <form th:action="@{/employees}" th:object="${employeeDto}" method="post" id="multiForm">
+      <h2 class="text-center py-md-4 py-sm-5">Employee Registration</h2>
       <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
         <div th:insert="~{fragments/personalInfoForm.html :: personalInfoForm}" class="col-11 col-md-10 col-lg-8 form-step active"></div>
         <div th:insert="~{fragments/addressInfoForm.html :: addressInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>

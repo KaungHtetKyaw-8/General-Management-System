@@ -5,11 +5,13 @@
 
 <!--				Employment Info-->
 <div th:fragment="employeeInfoForm">
-  <h5 class="my-2 text-center">Employment Info</h5>
+  <h5 class="my-2 text-center" th:text="#{header.employee.sub}">Employment Info</h5>
   <div class="row row-cols-1 row-cols-md-2">
     <div class="col">
       <div class="mb-3 my-3">
-        <label th:for="${employmentDate}" class="form-label">Employment Date</label>
+        <label th:for="${employmentDate}"
+               th:text="#{header.employee.empDate}"
+               class="form-label"></label>
         <input type="date" class="form-control"
                th:field="*{employmentDate}"
                th:classappend="${#fields.hasErrors('employmentDate')} ? 'form-control-invalid' : ''">
@@ -22,17 +24,17 @@
 
     <div class="col">
       <div class="mb-3 my-3">
-        <label th:for="${employmentType}" class="form-label">Employment Type</label>
-        <input type="text" class="form-control suggest-input-null" placeholder="Employment Type"
+        <label th:for="${employmentType}"
+               th:text="#{header.employee.empType}"
+               class="form-label"></label>
+        <input type="text" class="form-control suggest-input"
+               th:placeholder="#{header.employee.empType}"
                th:field="*{employmentType}"
-               th:classappend="${#fields.hasErrors('employmentType')} ? 'form-control-invalid' : ''"
-               data-url=""
-               data-target="#employmentTypeSuggest"
-               data-renderer="departmentRenderer"
-               data-fetcher="departmentFetcher"
-               data-fetcherConfig="no-repeat"
+               th:classappend="${#fields.hasErrors('departmentName')} ? 'form-control-invalid' : ''"
+               th:data-url="@{/api/suggest/employmenttype}"
+               th:autocomplete="#{autocomplete.status}"
+               th:data-fetcherConfig="${'repeat'}"
         >
-        <ul class="list-group position-absolute shadow d-none" id="employmentTypeSuggest"></ul>
         <div class="invalid-feedback"
              th:if="${#fields.hasErrors('employmentType')}"
              th:errors="*{employmentType}">
@@ -42,17 +44,17 @@
 
     <div class="col">
       <div class="mb-3 my-3">
-        <label th:for="${departmentName}" class="form-label">Department Name</label>
-        <input type="text" class="form-control suggest-input-null" placeholder="Department Name"
+        <label th:for="${departmentName}"
+               th:text="#{header.employee.depName}"
+               class="form-label"></label>
+        <input type="text" class="form-control suggest-input"
+               th:placeholder="#{header.employee.depName}"
                th:field="*{departmentName}"
                th:classappend="${#fields.hasErrors('departmentName')} ? 'form-control-invalid' : ''"
-               data-url=""
-               data-target="#departmentSuggest"
-               data-renderer="departmentRenderer"
-               data-fetcher="departmentFetcher"
-               data-fetcherConfig="no-repeat"
+               th:data-url="@{/api/suggest/departmentname}"
+               th:autocomplete="#{autocomplete.status}"
+               th:data-fetcherConfig="${'repeat'}"
         >
-        <ul class="list-group position-absolute shadow d-none" id="departmentSuggest"></ul>
         <div class="invalid-feedback"
              th:if="${#fields.hasErrors('departmentName')}"
              th:errors="*{departmentName}">
@@ -65,7 +67,8 @@
         <label th:for="${salary}" class="form-label">Salary</label>
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input type="number" class="form-control" placeholder="Salary"
+          <input type="number" class="form-control"
+                 th:placeholder="#{header.employee.empSalary}"
                  th:field="*{salary}"
                  th:classappend="${#fields.hasErrors('salary')} ? 'form-control-invalid' : ''">
           <div class="invalid-feedback"

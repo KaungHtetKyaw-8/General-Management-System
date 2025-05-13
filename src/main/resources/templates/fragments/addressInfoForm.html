@@ -16,10 +16,8 @@
                th:autocomplete="#{autocomplete.status}"
                th:classappend="${#fields.hasErrors('address.countryCode')} ? 'form-control-invalid' : ''"
                data-url="https://countriesnow.space/api/v0.1/countries"
-               data-target="#countrySuggestBox"
                data-renderer="countryRenderer"
                data-fetcher="countryAndCityFetcher"
-               data-fetcherConfig="no-repeat"
         >
         <ul class="list-group position-absolute shadow" id="countrySuggestBox" style="display: none;"></ul>
         <div class="invalid-feedback"
@@ -36,10 +34,8 @@
                th:autocomplete="#{autocomplete.status}"
                th:classappend="${#fields.hasErrors('address.city')} ? 'form-control-invalid' : ''"
                data-url="https://countriesnow.space/api/v0.1/countries"
-               data-target="#citySuggestBox"
                data-renderer="cityRenderer"
                data-fetcher="countryAndCityFetcher"
-               data-fetcherConfig="no-repeat"
         >
         <ul class="list-group position-absolute shadow" id="citySuggestBox" style="display: none;"></ul>
         <div class="invalid-feedback"
@@ -52,11 +48,11 @@
       <div class="mb-3 my-3">
         <label class="form-label"
                th:for="${'address.street'}"
-               th:text="#{header.address.street}"
-               th:autocomplete="#{autocomplete.status}"></label>
+               th:text="#{header.address.street}"></label>
         <input type="text" class="form-control" placeholder="eg. XXX st."
                th:field="*{address.street}"
-               th:classappend="${#fields.hasErrors('address.street')} ? 'form-control-invalid' : ''">
+               th:classappend="${#fields.hasErrors('address.street')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}">
         <div class="invalid-feedback"
              th:if="${#fields.hasErrors('address.street')}"
              th:errors="*{address.street}">
@@ -67,11 +63,11 @@
       <div class="mb-3 my-3">
         <label class="form-label"
                th:for="${'address.apartment'}"
-               th:text="#{header.address.apartment}"
-               th:autocomplete="#{autocomplete.status}"></label>
+               th:text="#{header.address.apartment}"></label>
         <input type="text" class="form-control" placeholder="eg. XX/XXX"
                th:field="*{address.apartment}"
-               th:classappend="${#fields.hasErrors('address.apartment')} ? 'form-control-invalid' : ''">
+               th:classappend="${#fields.hasErrors('address.apartment')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}">
         <div class="invalid-feedback"
              th:if="${#fields.hasErrors('address.apartment')}"
              th:errors="*{address.apartment}">

@@ -1,14 +1,16 @@
 package com.khk.mgt.dao;
 
 import com.khk.mgt.ds.Employee;
-import org.springframework.data.domain.Limit;
+import com.khk.mgt.ds.Address;
+import com.khk.mgt.dto.chart.GroupedLabelValue;
+import com.khk.mgt.dto.chart.LabelValue;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -17,4 +19,22 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT DISTINCT e.departmentName FROM Employee e WHERE LOWER(e.departmentName) LIKE LOWER(CONCAT(:namePart, '%')) ORDER BY e.departmentName ASC")
     List<String> findSuggestionDepartmentNames(@Param("namePart") String namePart, Pageable pageable);
+
+    @Query("SELECT DISTINCT e.employmentType FROM Employee e WHERE LOWER(e.employmentType) LIKE LOWER(CONCAT(:namePart, '%')) ORDER BY e.employmentType ASC")
+    List<String> findSuggestionEmploymentType(@Param("namePart") String namePart, Pageable pageable);
+
+    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(e.gender, COUNT(e)) FROM Employee e GROUP BY e.gender")
+    List<LabelValue> findCountByGender();
+
+    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(e.departmentName, COUNT(e)) FROM Employee e GROUP BY e.departmentName")
+    List<LabelValue> findCountByDepartmentName();
+
+    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(e.employmentType, COUNT(e)) FROM Employee e GROUP BY e.employmentType")
+    List<LabelValue> findCountByEmploymentType();
+
+    @Query("SELECT new com.khk.mgt.dto.chart.GroupedLabelValue(e.gender,e.address.city, COUNT(e)) FROM Employee e GROUP BY e.gender,e.address.city")
+    List<GroupedLabelValue> findCountByCity();
+
+    @Query("SELECT e.dateOfBirth FROM Employee e WHERE e.dateOfBirth IS NOT NULL")
+    List<Date> findAllDateOfBirth();
 }

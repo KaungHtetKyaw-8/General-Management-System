@@ -1,4 +1,4 @@
-package com.khk.mgt.dto;
+package com.khk.mgt.dto.common;
 
 import com.khk.mgt.validator.annotations.UniqueMail;
 import com.khk.mgt.validator.annotations.UniquePhone;

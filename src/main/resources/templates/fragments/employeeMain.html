@@ -2,8 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<main th:fragment="employeeMain">
-    <div th:insert="~{fragments/employeeFormMain.html :: employeeFormMain}"></div>
+<main th:fragment="employeeMain" class="container-fluid px-0">
+    <div class="d-flex vh-100">
+<!--        Side Bar Insert-->
+        <div th:insert="~{fragments/sideBar.html :: sideBar}"></div>
+<!--        Main Section-->
+        <div class="main-content" th:switch="${navStatus}">
+            <div th:case="'dashBoard'" th:insert="~{fragments/employeeDashBoard.html :: employeeDashBoard}" ></div>
+            <div th:case="'empAdd'" th:insert="~{fragments/employeeFormMain.html :: employeeFormMain}"></div>
+        </div>
+    </div>
+
 </main>
 
 </body>

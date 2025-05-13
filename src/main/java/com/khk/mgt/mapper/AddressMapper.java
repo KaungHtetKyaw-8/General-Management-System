@@ -1,7 +1,7 @@
 package com.khk.mgt.mapper;
 
 import com.khk.mgt.ds.Address;
-import com.khk.mgt.dto.AddressDto;
+import com.khk.mgt.dto.common.AddressDto;
 
 public class AddressMapper {
 

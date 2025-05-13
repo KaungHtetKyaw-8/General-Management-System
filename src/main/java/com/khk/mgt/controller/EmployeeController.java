@@ -1,8 +1,7 @@
 package com.khk.mgt.controller;
 
 import com.khk.mgt.ds.Employee;
-import com.khk.mgt.dto.EmployeeDto;
-import com.khk.mgt.dto.TableHeaderList;
+import com.khk.mgt.dto.common.EmployeeDto;
 import com.khk.mgt.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +20,29 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private TableHeaderList tableHeaderDto;
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("employeeDto", new EmployeeDto());
-        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
+//        model.addAttribute("employeeDto", new EmployeeDto());
+//        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
+        model.addAttribute("navStatus", "dashBoard");
         return "employeeIndex";
+    }
+
+    @GetMapping(params = "nav")
+    public String navChange(@RequestParam("nav") String navStatus, Model model) {
+        System.out.println("Change Nav : " + navStatus);
+        model.addAttribute("navStatus", navStatus);
+
+        switch (navStatus) {
+            case "empAdd":
+                model.addAttribute("employeeDto", new EmployeeDto());
+                break;
+            default:
+        }
+
+        return "employeeIndex";
+
     }
 
     @PostMapping(params = "addRow")
@@ -50,12 +64,10 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             System.out.println("Binding Errors : " + bindingResult.getAllErrors());
             System.out.println("Return Value : " + employeeDto);
-//            model.addAttribute("employeeDto", employeeDto);
             return "employeeIndex";
         }else{
             // process the form submission
             System.out.println("Submitted: " + employeeDto);
-//            employeeService.saveEmployee(employeeDto);
             return "redirect:/employees";
         }
     }

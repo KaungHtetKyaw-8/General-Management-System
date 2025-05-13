@@ -1,4 +1,4 @@
-package com.khk.mgt.dto;
+package com.khk.mgt.dto.common;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

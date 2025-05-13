@@ -1,4 +1,4 @@
-package com.khk.mgt.dto;
+package com.khk.mgt.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

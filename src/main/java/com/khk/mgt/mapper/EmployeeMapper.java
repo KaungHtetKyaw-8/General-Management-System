@@ -9,6 +9,7 @@ public class EmployeeMapper {
         if (dto == null) return null;
 
         Employee entity = new Employee();
+        entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
@@ -34,6 +35,7 @@ public class EmployeeMapper {
 
         EmployeeDto dto = new EmployeeDto();
 
+        dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());

@@ -14,16 +14,16 @@ public class AddressDto {
 
     private Long id;
 
-    @NotBlank(message = "Apartment must not blank.")
+    @NotBlank(message = "Apartment must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String apartment;
 
-    @NotBlank(message = "Street must not blank.")
+    @NotBlank(message = "Street must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String street;
 
-    @NotBlank(message = "City must not blank.")
+    @NotBlank(message = "City must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String city;
 
-    @NotBlank(message = "Country must not blank.")
+    @NotBlank(message = "Country must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String countryCode;
 
     public AddressDto() {

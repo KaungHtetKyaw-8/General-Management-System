@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="employeeDashBoard" class="row">
+        <div class="col-12 col-lg-4">
+            <div class="chart-container"
+                 id="employeeGender"
+                 th:data-url="@{/api/employee/chart/gender}"
+                 data-name="Gender Group"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+            <div class="chart-container"
+                 id="employeeAge"
+                 th:data-url="@{/api/employee/chart/age}"
+                 data-name="Age Range Group"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+            <div class="chart-container"
+                 id="employeeDepartment"
+                 th:data-url="@{/api/employee/chart/department}"
+                 data-name="Department Group"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 mt-5" style="height: 300px">
+            <div class="chart-container"
+                 id="employeeCity"
+                 th:data-url="@{/api/employee/chart/city}"
+                 data-name="Employee City Group"
+                 data-charttype="bar">
+                <canvas></canvas>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 pt-md-0 pt-lg-3 mt-5">
+            <h4 th:text="#{header.employee.dashboard.sub}"></h4>
+            <table class="table-style w-100 view-table">
+                <thead>
+                    <tr class="w-100">
+                        <th th:text="#{header.person.firstName}"></th>
+                        <th th:text="#{header.person.lastName}"></th>
+                        <th th:text="#{header.employee.empDate}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="itemData : ${newEmployees}">
+                        <td th:text="${itemData.firstName}"></td>
+                        <td th:text="${itemData.lastName}"></td>
+                        <td th:text="${itemData.employmentDate}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

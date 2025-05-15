@@ -2,12 +2,16 @@ package com.khk.mgt.controller;
 
 import com.khk.mgt.ds.Employee;
 import com.khk.mgt.dto.common.EmployeeDto;
+import com.khk.mgt.dto.common.OnCreate;
+import com.khk.mgt.dto.common.OnUpdate;
+import com.khk.mgt.mapper.EmployeeMapper;
 import com.khk.mgt.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,29 +25,149 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 
-    @GetMapping
+    @GetMapping({"","/","home","index"})
     public String index(Model model) {
 //        model.addAttribute("employeeDto", new EmployeeDto());
 //        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
         model.addAttribute("navStatus", "dashBoard");
+        model.addAttribute("newEmployees", employeeService.newest5Employees());
+
         return "employeeIndex";
     }
 
     @GetMapping(params = "nav")
     public String navChange(@RequestParam("nav") String navStatus, Model model) {
-        System.out.println("Change Nav : " + navStatus);
         model.addAttribute("navStatus", navStatus);
 
         switch (navStatus) {
+            case "dashBoard":
+                model.addAttribute("newEmployees", employeeService.newest5Employees());
+                break;
+            case "empView":
+                model.addAttribute("viewEmployeesDtoList", new ArrayList<EmployeeDto>());
+                break;
             case "empAdd":
-                model.addAttribute("employeeDto", new EmployeeDto());
+                model.addAttribute("addEmployeeDto", new EmployeeDto());
+                break;
+            case "empUpdate":
+                model.addAttribute("updateEmployeeDto", new EmployeeDto());
+                break;
+            case "empDelete":
+                model.addAttribute("deleteEmployeeDto", new EmployeeDto());
                 break;
             default:
         }
+        return "employeeIndex";
+    }
+
+    @PostMapping(value = "/viewsearch",params = "search")
+    public String viedSearch(@RequestParam("q") String query, Model model) {
+        List<EmployeeDto> viewEmployeesDtoList = employeeService.searchIdOrName(query);
+        System.out.println("Search Result : " + viewEmployeesDtoList);
+        model.addAttribute("navStatus", "empView");
+        model.addAttribute("viewEmployeesDtoList", viewEmployeesDtoList);
+        return "employeeIndex";
+    }
+
+    @PostMapping(value = "/add",params = "submit")
+    public String employeeAdd(@Validated(OnCreate.class) @ModelAttribute("addEmployeeDto") EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("navStatus", "empAdd");
+
+        if (bindingResult.hasErrors()) {
+            // process the form error
+            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
+            model.addAttribute("registerFail", true);
+            return "employeeIndex";
+        }else{
+            // process the form submission
+            employeeService.saveEmployee(employeeDto);
+
+            model.addAttribute("registerSuccess", true);
+            model.addAttribute("employeeDto", new EmployeeDto());
+            return "employeeIndex";
+        }
+    }
+
+    @PostMapping(value = "/update",params = "search")
+    public String employeeUpdateSearch(@RequestParam("q") String query, Model model) {
+
+        model.addAttribute("navStatus", "empUpdate");
+
+        try {
+            long id = Long.parseLong(query);
+            EmployeeDto updateEmployeesDto = employeeService.getEmployeeById(id);
+            model.addAttribute("updateEmployeeDto", updateEmployeesDto);
+            if (updateEmployeesDto == null) {
+                model.addAttribute("updateSearchNotFound",true);
+                model.addAttribute("updateEmployeeDto", new EmployeeDto());
+            }
+        }catch (NumberFormatException e) {
+            model.addAttribute("updateSearchNotFound",true);
+            model.addAttribute("updateEmployeeDto", new EmployeeDto());
+        }
 
         return "employeeIndex";
-
     }
+
+    @PostMapping(value = "/update",params = "submit")
+    public String employeeUpdate(@Validated(OnUpdate.class) @ModelAttribute("updateEmployeeDto") EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("navStatus", "empUpdate");
+
+        if (bindingResult.hasErrors()) {
+            // process the form error
+            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
+            model.addAttribute("updateFail", true);
+            return "employeeIndex";
+        }else{
+            // process the form submission
+            employeeService.updateEmployee(employeeDto);
+            model.addAttribute("updateSuccess", true);
+            model.addAttribute("updateEmployeeDto", new EmployeeDto());
+            return "employeeIndex";
+        }
+    }
+
+
+    @PostMapping(value = "/delete",params = "search")
+    public String employeeDeleteSearch(@RequestParam("q") String query, Model model) {
+
+        model.addAttribute("navStatus", "empDelete");
+
+        try {
+            long id = Long.parseLong(query);
+            EmployeeDto deleteEmployeesDto = employeeService.getEmployeeById(id);
+            model.addAttribute("deleteEmployeeDto", deleteEmployeesDto);
+            if (deleteEmployeesDto == null) {
+                model.addAttribute("deleteSearchNotFound",true);
+                model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+            }
+        }catch (NumberFormatException e) {
+            model.addAttribute("deleteSearchNotFound",true);
+            model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+        }
+
+        return "employeeIndex";
+    }
+
+    @PostMapping(value = "/delete",params = "submit")
+    public String employeeDelete(@Validated(OnUpdate.class) @ModelAttribute("deleteEmployeeDto") EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("navStatus", "empDelete");
+
+        if (bindingResult.hasErrors()) {
+            // process the form error
+            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
+            model.addAttribute("deleteFail", true);
+            return "employeeIndex";
+        }else{
+            // process the form submission
+            employeeService.deleteEmployee(employeeDto.getId());
+            model.addAttribute("deleteSuccess", true);
+            model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+            return "employeeIndex";
+        }
+    }
+
+
 
     @PostMapping(params = "addRow")
     public String addRow(@Valid @ModelAttribute("employeeDtoList") List<EmployeeDto> employeeDtoList, BindingResult bindingResult, Model model) {
@@ -56,19 +180,6 @@ public class EmployeeController {
             System.out.println("Employee Data : " + employeeDtoList);
             model.addAttribute("employeeDtoList", employeeDtoList);
             return "employeeIndex";
-        }
-    }
-
-    @PostMapping(params = "submit")
-    public String submit(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("Binding Errors : " + bindingResult.getAllErrors());
-            System.out.println("Return Value : " + employeeDto);
-            return "employeeIndex";
-        }else{
-            // process the form submission
-            System.out.println("Submitted: " + employeeDto);
-            return "redirect:/employees";
         }
     }
 }

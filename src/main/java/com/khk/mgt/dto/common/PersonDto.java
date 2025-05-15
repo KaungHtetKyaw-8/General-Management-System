@@ -23,26 +23,26 @@ public class PersonDto {
 
     private Long id;
 
-    @NotBlank(message = "FirstName must not blank.")
+    @NotBlank(message = "FirstName must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String firstName;
 
-    @NotBlank(message = "LastName must not blank.")
+    @NotBlank(message = "LastName must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String lastName;
 
-    @NotBlank(message = "Gender must not blank.")
+    @NotBlank(message = "Gender must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String gender;
 
-    @NotNull(message = "Date OF Birth must not blank.")
+    @NotNull(message = "Date OF Birth must not blank.",groups = {OnCreate.class, OnUpdate.class})
     @Past
     private Date dateOfBirth;
 
-    @Email(message = "Invalid email address.")
-    @NotBlank(message = "Email must not blank.")
-    @UniqueMail
+    @Email(message = "Invalid email address.",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "Email must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @UniqueMail(groups = {OnCreate.class})
     private String email;
 
     @NotBlank(message = "Phone must not blank.")
-    @UniquePhone
+    @UniquePhone(groups = {OnCreate.class})
     private String phone;
 
     @Valid

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="employeeView"
+         class="container-fluid">
+        <h3 class="my-3">Employee View</h3>
+        <div class="row">
+            <form th:insert="~{fragments/employee/emloyeeViewSearchForm.html :: viewEmployeeSearchForm}"
+                  th:action="@{/employees/viewsearch}"
+                  method="post"
+                  class="col-12">
+            </form>
+            <!-- View Table -->
+            <div th:insert="~{fragments/employee/employeeTableView.html :: viewEmployeeTable}"
+                 class="col-12 overflow-auto">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

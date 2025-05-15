@@ -11,18 +11,18 @@ import java.sql.Date;
 
 public class EmployeeDto extends PersonDto {
 
-    @NotNull(message = "EmploymentDate must not blank.")
-    @FutureOrPresent
+    @NotNull(message = "EmploymentDate must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @FutureOrPresent(groups = {OnCreate.class})
     private Date employmentDate;
 
-    @NotBlank(message = "EmploymentType must not blank.")
+    @NotBlank(message = "EmploymentType must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String employmentType;
 
-    @NotBlank(message = "DepartmentName must not blank.")
+    @NotBlank(message = "DepartmentName must not blank.",groups = {OnCreate.class, OnUpdate.class})
     private String departmentName;
 
-    @NotNull(message = "Salary must not blank.")
-    @DecimalMin(value = "0.0",message = "Salary must not negative value.")
+    @NotNull(message = "Salary must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @DecimalMin(value = "0.0",message = "Salary must not negative value.",groups = {OnCreate.class, OnUpdate.class})
     private double salary;
 
     public EmployeeDto() {

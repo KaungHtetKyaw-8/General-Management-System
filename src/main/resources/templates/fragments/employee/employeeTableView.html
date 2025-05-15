@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewEmployeeTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.person.id}" class="text-nowrap"></th>
+                <th th:text="#{header.person.firstName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.lastName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.dob}" class="text-nowrap"></th>
+                <th th:text="#{header.person.gender}" class="text-nowrap"></th>
+                <th th:text="#{header.person.email}" class="text-nowrap"></th>
+                <th th:text="#{header.person.phone}" class="text-nowrap"></th>
+
+                <th th:text="#{header.address.country}" class="text-nowrap"></th>
+                <th th:text="#{header.address.city}" class="text-nowrap"></th>
+                <th th:text="#{header.address.street}" class="text-nowrap"></th>
+                <th th:text="#{header.address.apartment}" class="text-nowrap"></th>
+
+                <th th:text="#{header.employee.empDate}" class="text-nowrap"></th>
+                <th th:text="#{header.employee.empType}" class="text-nowrap"></th>
+                <th th:text="#{header.employee.depName}" class="text-nowrap"></th>
+                <th th:text="#{header.employee.empSalary}" class="text-nowrap"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewEmployeesDtoList == null or viewEmployeesDtoList.isEmpty()}">
+                No Data
+            </tr>
+
+            <tr th:each="itemData : ${viewEmployeesDtoList}">
+                <td th:text="${itemData.id}"></td>
+                <td th:text="${itemData.firstName}"></td>
+                <td th:text="${itemData.lastName}"></td>
+                <td th:text="${itemData.dateOfBirth}"></td>
+                <td th:text="${itemData.gender}"></td>
+                <td th:text="${itemData.email}"></td>
+                <td th:text="${itemData.phone}"></td>
+
+                <td th:text="${itemData.address.countryCode}"></td>
+                <td th:text="${itemData.address.city}"></td>
+                <td th:text="${itemData.address.street}"></td>
+                <td th:text="${itemData.address.apartment}"></td>
+
+                <td th:text="${itemData.employmentDate}"></td>
+                <td th:text="${itemData.employmentType}"></td>
+                <td th:text="${itemData.departmentName}"></td>
+                <td th:text="${itemData.salary}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

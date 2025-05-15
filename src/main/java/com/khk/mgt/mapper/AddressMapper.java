@@ -9,6 +9,7 @@ public class AddressMapper {
         if (dto == null) return null;
 
         Address address = new Address();
+        address.setId(dto.getId());
         address.setStreet(dto.getStreet());
         address.setCity(dto.getCity());
         address.setCountryCode(dto.getCountryCode());
@@ -21,6 +22,7 @@ public class AddressMapper {
         if (address == null) return null;
 
         AddressDto addressDto = new AddressDto();
+        addressDto.setId(address.getId());
         addressDto.setStreet(address.getStreet());
         addressDto.setCity(address.getCity());
         addressDto.setCountryCode(address.getCountryCode());

@@ -5,11 +5,14 @@
 <main th:fragment="employeeMain" class="container-fluid px-0">
     <div class="d-flex vh-100">
 <!--        Side Bar Insert-->
-        <div th:insert="~{fragments/sideBar.html :: sideBar}"></div>
+        <div th:insert="~{fragments/employee/employeeSideBar.html :: sideBar}"></div>
 <!--        Main Section-->
         <div class="main-content" th:switch="${navStatus}">
-            <div th:case="'dashBoard'" th:insert="~{fragments/employeeDashBoard.html :: employeeDashBoard}" ></div>
-            <div th:case="'empAdd'" th:insert="~{fragments/employeeFormMain.html :: employeeFormMain}"></div>
+            <div th:case="'dashBoard'" th:insert="~{fragments/employee/employeeDashBoard.html :: employeeDashBoard}" ></div>
+            <div th:case="'empView'" th:insert="~{fragments/employee/employeeView.html :: employeeView}"></div>
+            <div th:case="'empAdd'" th:insert="~{fragments/employee/employeeRegisterForm.html :: employeeRegisterForm}"></div>
+            <div th:case="'empUpdate'" th:insert="~{fragments/employee/employeeUpdateForm.html :: employeeUpdateForm}"></div>
+            <div th:case="'empDelete'" th:insert="~{fragments/employee/employeeDeleteForm.html :: employeeDeleteForm}"></div>
         </div>
     </div>
 

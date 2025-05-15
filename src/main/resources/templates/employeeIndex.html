@@ -10,10 +10,10 @@
 </head>
 <body class="dark-theme bg-gradient">
 
-<main th:insert="~{fragments/employeeMain :: employeeMain}"></main>
+<main th:insert="~{fragments/employeeMain.html :: employeeMain}"></main>
 
-<!--<div th:object="${employeeDto}">-->
-<!--    <div th:field="*{address.countryCode}"></div>-->
+<!--<div th:each="itemData : ${newEmployees}">-->
+<!--    <div th:text="itemData.firstName"></div>-->
 <!--</div>-->
 
 <!-- popper Script-->

@@ -12,7 +12,78 @@
 <!-- Custom Script-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="dark-theme bg-gradient">
+<body class="dark-theme bg-gradient vh-100">
+
+
+<!-- Search Form -->
+<form th:action="@{/employees}" method="get" class="row g-3 mb-4">
+	<div class="col-auto">
+		<input type="text" name="keyword" class="form-control" placeholder="Search by name or ID"
+			   th:value="${keyword}">
+	</div>
+	<div class="col-auto">
+		<button type="submit" class="btn btn-primary">Search</button>
+	</div>
+</form>
+
+<div class="container">
+	<h2>Employees</h2>
+
+	<table class="table table-bordered table-striped">
+		<thead class="table-dark">
+		<tr>
+			<th>Name</th>
+			<th>Gender</th>
+			<th>Age</th>
+			<th>Department</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="emp : ${employees}">
+			<td th:text="${emp.name}">Name</td>
+			<td th:text="${emp.gender}">Gender</td>
+			<td th:text="${emp.age}">Age</td>
+			<td th:text="${emp.department}">Department</td>
+		</tr>
+		<tr th:each="emp : ${employees}">
+			<td th:text="${emp.name}">Name</td>
+			<td th:text="${emp.gender}">Gender</td>
+			<td th:text="${emp.age}">Age</td>
+			<td th:text="${emp.department}">Department</td>
+		</tr>
+		<tr th:each="emp : ${employees}">
+			<td th:text="${emp.name}">Name</td>
+			<td th:text="${emp.gender}">Gender</td>
+			<td th:text="${emp.age}">Age</td>
+			<td th:text="${emp.department}">Department</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+
+	<div class="alert alert-primary d-flex align-items-center" role="alert">
+		<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+		</svg>
+		<div>
+			An example alert with an icon
+		</div>
+	</div>
+
+	<div class="alert alert-primary d-flex align-items-center" role="alert">
+		<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+		</svg>
+		<span>Some Text</span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+
+
+</div>
 
 <!--	<div class="container-fluid px-0">-->
 <!--		<div class="d-flex vh-100">-->

@@ -11,11 +11,22 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
 public interface EmployeeDao extends JpaRepository<Employee, Integer> {
     boolean existsByEmail(String email);
+
+    List<Employee> findTop5ByOrderByEmploymentDateDesc();
+
+    Employee findById(Long id);
+
+    @Query("SELECT e FROM Employee e WHERE " +
+            "CAST(e.id AS string) LIKE :keyword OR " +
+            "LOWER(e.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(e.lastName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Employee> searchIdOrNameByKeyword(@Param("keyword") String keyword);
 
     @Query("SELECT DISTINCT e.departmentName FROM Employee e WHERE LOWER(e.departmentName) LIKE LOWER(CONCAT(:namePart, '%')) ORDER BY e.departmentName ASC")
     List<String> findSuggestionDepartmentNames(@Param("namePart") String namePart, Pageable pageable);
@@ -37,4 +48,6 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT e.dateOfBirth FROM Employee e WHERE e.dateOfBirth IS NOT NULL")
     List<Date> findAllDateOfBirth();
+
+    void deleteById(Long id);
 }

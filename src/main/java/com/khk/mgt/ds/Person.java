@@ -22,7 +22,7 @@ public abstract class Person{
     private String email;
     private String phone;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "address_id")
     private Address address;
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Customer extends Person {
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "customer",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private List<PointCard> pointCard;
 
     public Customer() {

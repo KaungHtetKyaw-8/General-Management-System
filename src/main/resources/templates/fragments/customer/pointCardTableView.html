@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewPointCardTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.customer.id}" class="text-nowrap"></th>
+                <th th:text="#{header.person.firstName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.lastName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.gender}" class="text-nowrap"></th>
+
+                <th th:text="#{header.customer.pointcard.id}" class="text-nowrap"></th>
+                <th th:text="#{header.customer.pointcard.registerDate}" class="text-nowrap"></th>
+                <th th:text="#{header.customer.pointcard.category}" class="text-nowrap"></th>
+                <th th:text="#{header.customer.pointcard.point}" class="text-nowrap"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewPointCardDtoList == null or viewPointCardDtoList.isEmpty()}">
+                No Data
+            </tr>
+
+            <tr th:each="itemData : ${viewPointCardDtoList}">
+                <td th:text="${itemData.customerId}"></td>
+                <td th:text="${itemData.firstName}"></td>
+                <td th:text="${itemData.lastName}"></td>
+                <td th:text="${itemData.gender}"></td>
+
+                <td th:text="${itemData.pointCardId}"></td>
+                <td th:text="${itemData.registrationDate}"></td>
+                <td th:text="${itemData.pointCardType}"></td>
+                <td th:text="${itemData.points}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

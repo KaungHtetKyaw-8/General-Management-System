@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Point Card Info-->
+<div th:fragment="pointCardDeleteInfoForm">
+  <h5 class="my-2 text-center" th:text="#{header.customer.pointcard.sub}"></h5>
+  <div class="row row-cols-1 row-cols-md-2">
+
+<!-- Customer Id Input-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${customerId}"
+               th:text="#{header.customer.id}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:placeholder="#{header.customer.id}"
+               th:field="*{customerId}"
+               th:classappend="${#fields.hasErrors('customerId')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}"
+        >
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('customerId')}"
+             th:errors="*{customerId}">
+        </div>
+      </div>
+    </div>
+<!--    Card Id Input-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${pointCardId}"
+               th:text="#{header.customer.pointcard.id}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:placeholder="#{header.customer.pointcard.id}"
+               th:field="*{pointCardId}"
+               th:classappend="${#fields.hasErrors('pointCardId')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}"
+        >
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('pointCardId')}"
+             th:errors="*{pointCardId}">
+        </div>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasGlobalErrors()}">
+          <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="d-flex justify-content-end gap-2">
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+
+</body>
+</html>

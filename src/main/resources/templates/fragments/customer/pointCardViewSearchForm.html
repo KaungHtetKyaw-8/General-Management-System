@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div th:fragment="viewEmployeeSearchForm" class="input-group mb-3">
-        <input th:value="${searchQuery}"
+    <div th:fragment="viewPointCardSearchForm" class="input-group mb-3">
+        <input th:value="*{value}"
                th:autocomplete="#{autocomplete.status}"
-               name="searchQuery"
+               th:field="*{value}"
                type="text" class="form-control"
                placeholder="Search">
+        <select class="btn btn-primary" th:field="*{searchType}">
+            <option class="bg-light text-dark" value="1" selected>By Customer Id</option>
+            <option class="bg-light text-dark" value="2">By Point Card Id</option>
+        </select>
         <button class="btn btn-primary" type="submit" name="search">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -15,6 +19,11 @@
             </span>
             Search
         </button>
+
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('value')}"
+             th:errors="*{value}">
+        </div>
     </div>
 </body>
 </html>

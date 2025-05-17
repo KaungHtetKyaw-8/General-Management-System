@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewCustomerTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.person.id}" class="text-nowrap"></th>
+                <th th:text="#{header.person.firstName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.lastName}" class="text-nowrap"></th>
+                <th th:text="#{header.person.dob}" class="text-nowrap"></th>
+                <th th:text="#{header.person.gender}" class="text-nowrap"></th>
+                <th th:text="#{header.person.email}" class="text-nowrap"></th>
+                <th th:text="#{header.person.phone}" class="text-nowrap"></th>
+
+                <th th:text="#{header.address.country}" class="text-nowrap"></th>
+                <th th:text="#{header.address.city}" class="text-nowrap"></th>
+                <th th:text="#{header.address.street}" class="text-nowrap"></th>
+                <th th:text="#{header.address.apartment}" class="text-nowrap"></th>
+
+                <th th:text="#{header.customer.pointcard.count}" class="text-nowrap"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewCustomerDtoList == null or viewCustomerDtoList.isEmpty()}">
+                No Data
+            </tr>
+
+            <tr th:each="itemData : ${viewCustomerDtoList}">
+                <td th:text="${itemData.id}"></td>
+                <td th:text="${itemData.firstName}"></td>
+                <td th:text="${itemData.lastName}"></td>
+                <td th:text="${itemData.dateOfBirth}"></td>
+                <td th:text="${itemData.gender}"></td>
+                <td th:text="${itemData.email}"></td>
+                <td th:text="${itemData.phone}"></td>
+
+                <td th:text="${itemData.address.countryCode}"></td>
+                <td th:text="${itemData.address.city}"></td>
+                <td th:text="${itemData.address.street}"></td>
+                <td th:text="${itemData.address.apartment}"></td>
+
+                <td th:text="${itemData.pointCard.size()}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

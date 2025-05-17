@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="pointCardView"
+         class="container-fluid">
+        <h3 class="my-3">Point Card View</h3>
+        <div class="row">
+            <form th:insert="~{fragments/customer/pointCardViewSearchForm.html :: viewPointCardSearchForm }"
+                  th:action="@{/customer/point/viewsearch}"
+                  th:object="${searchQuery}"
+                  method="post"
+                  class="col-12">
+            </form>
+            <!-- View Table -->
+            <div th:insert="~{fragments/customer/pointCardTableView.html :: viewPointCardTable}"
+                 class="col-12 overflow-auto">
+            </div>
+        </div>
+
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFail}?'show'">
+            <span>Search ID Not Found!</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFailForNumber}?'show'">
+            <span>Search Value Must Be Number!</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</body>
+</html>

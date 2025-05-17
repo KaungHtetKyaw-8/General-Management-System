@@ -45,15 +45,18 @@ public class EmployeeController {
                 break;
             case "empView":
                 model.addAttribute("viewEmployeesDtoList", new ArrayList<EmployeeDto>());
+                model.addAttribute("searchQuery" , "");
                 break;
             case "empAdd":
                 model.addAttribute("addEmployeeDto", new EmployeeDto());
                 break;
             case "empUpdate":
                 model.addAttribute("updateEmployeeDto", new EmployeeDto());
+                model.addAttribute("searchQuery" , "");
                 break;
             case "empDelete":
                 model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+                model.addAttribute("searchQuery" , "");
                 break;
             default:
         }
@@ -61,10 +64,16 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/viewsearch",params = "search")
-    public String viedSearch(@RequestParam("q") String query, Model model) {
+    public String viedSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "employeeIndex";
+        }
+
         List<EmployeeDto> viewEmployeesDtoList = employeeService.searchIdOrName(query);
         System.out.println("Search Result : " + viewEmployeesDtoList);
         model.addAttribute("navStatus", "empView");
+        model.addAttribute("searchQuery" , query);
         model.addAttribute("viewEmployeesDtoList", viewEmployeesDtoList);
         return "employeeIndex";
     }
@@ -89,21 +98,28 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/update",params = "search")
-    public String employeeUpdateSearch(@RequestParam("q") String query, Model model) {
+    public String employeeUpdateSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
 
         model.addAttribute("navStatus", "empUpdate");
+
+        if (bindingResult.hasErrors()) {
+            return "employeeIndex";
+        }
 
         try {
             long id = Long.parseLong(query);
             EmployeeDto updateEmployeesDto = employeeService.getEmployeeById(id);
             model.addAttribute("updateEmployeeDto", updateEmployeesDto);
+            model.addAttribute("searchQuery" , "");
             if (updateEmployeesDto == null) {
                 model.addAttribute("updateSearchNotFound",true);
                 model.addAttribute("updateEmployeeDto", new EmployeeDto());
+                model.addAttribute("searchQuery" , query);
             }
         }catch (NumberFormatException e) {
             model.addAttribute("updateSearchNotFound",true);
             model.addAttribute("updateEmployeeDto", new EmployeeDto());
+            model.addAttribute("searchQuery" , query);
         }
 
         return "employeeIndex";
@@ -129,21 +145,28 @@ public class EmployeeController {
 
 
     @PostMapping(value = "/delete",params = "search")
-    public String employeeDeleteSearch(@RequestParam("q") String query, Model model) {
+    public String employeeDeleteSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
 
         model.addAttribute("navStatus", "empDelete");
+
+        if (bindingResult.hasErrors()) {
+            return "employeeIndex";
+        }
 
         try {
             long id = Long.parseLong(query);
             EmployeeDto deleteEmployeesDto = employeeService.getEmployeeById(id);
             model.addAttribute("deleteEmployeeDto", deleteEmployeesDto);
+            model.addAttribute("searchQuery" , "");
             if (deleteEmployeesDto == null) {
                 model.addAttribute("deleteSearchNotFound",true);
                 model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+                model.addAttribute("searchQuery" , query);
             }
         }catch (NumberFormatException e) {
             model.addAttribute("deleteSearchNotFound",true);
             model.addAttribute("deleteEmployeeDto", new EmployeeDto());
+            model.addAttribute("searchQuery" , query);
         }
 
         return "employeeIndex";

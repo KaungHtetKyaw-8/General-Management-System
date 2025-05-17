@@ -27,6 +27,10 @@ public class EmployeeService {
         return new ArrayList<>(employeeDao.findAll());
     }
 
+    public boolean emailExists(String email) {
+        return employeeDao.existsByEmail(email);
+    }
+
     public EmployeeDto getEmployeeById(long id) {
         return EmployeeMapper.toDto(employeeDao.findById(id));
     }

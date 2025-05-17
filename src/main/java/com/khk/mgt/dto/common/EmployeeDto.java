@@ -8,7 +8,6 @@ import java.sql.Date;
 
 @Getter
 @Setter
-
 public class EmployeeDto extends PersonDto {
 
     @NotNull(message = "EmploymentDate must not blank.",groups = {OnCreate.class, OnUpdate.class})

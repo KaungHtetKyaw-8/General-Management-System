@@ -47,7 +47,7 @@ body {
     padding: 1rem;
 }
 
-.nav-item:hover a{
+.nav-item:hover > a{
     background-color: var(--secondarly-bg-color);
 }
 

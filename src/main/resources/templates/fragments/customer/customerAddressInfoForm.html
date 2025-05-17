@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Address Form-->
+<div th:fragment="customerAddressInfoForm">
+  <h5 class="my-2 text-center">Address Info</h5>
+  <div class="row row-cols-1 row-cols-md-2">
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${'address.countryCode'}" class="form-label"
+               th:text="#{header.address.country}"></label>
+        <input type="text" class="form-control suggest-input" placeholder="Country"
+               th:field="*{address.countryCode}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('address.countryCode')} ? 'form-control-invalid' : ''"
+               data-url="https://countriesnow.space/api/v0.1/countries"
+               data-renderer="countryRenderer"
+               data-fetcher="countryAndCityFetcher"
+        >
+        <ul class="list-group position-absolute shadow" id="countrySuggestBox" style="display: none;"></ul>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('address.countryCode')}"
+             th:errors="*{address.countryCode}">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${'address.city'}" class="form-label" th:text="#{header.address.city}"></label>
+        <input type="text" class="form-control suggest-input" placeholder="City"
+               th:field="*{address.city}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('address.city')} ? 'form-control-invalid' : ''"
+               data-url="https://countriesnow.space/api/v0.1/countries"
+               data-renderer="cityRenderer"
+               data-fetcher="countryAndCityFetcher"
+        >
+        <ul class="list-group position-absolute shadow" id="citySuggestBox" style="display: none;"></ul>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('address.city')}"
+             th:errors="*{address.city}">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label class="form-label"
+               th:for="${'address.street'}"
+               th:text="#{header.address.street}"></label>
+        <input type="text" class="form-control" placeholder="eg. XXX st."
+               th:field="*{address.street}"
+               th:classappend="${#fields.hasErrors('address.street')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('address.street')}"
+             th:errors="*{address.street}">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label class="form-label"
+               th:for="${'address.apartment'}"
+               th:text="#{header.address.apartment}"></label>
+        <input type="text" class="form-control" placeholder="eg. XX/XXX"
+               th:field="*{address.apartment}"
+               th:classappend="${#fields.hasErrors('address.apartment')} ? 'form-control-invalid' : ''"
+               th:autocomplete="#{autocomplete.status}">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('address.apartment')}"
+             th:errors="*{address.apartment}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-primary form-prev-btn">Previous</button>
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>

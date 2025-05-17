@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="customerUpdateForm" class="container-fluid text-light" >
+  <form th:action="@{/customer/update}" th:object="${updateCustomerDto}" method="post" id="multiForm">
+    <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateSuccess}?'show'">
+      <span>Update Complete!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateFail}?'show'">
+      <span>Update Fail!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateSearchNotFound}?'show'">
+      <span>Update Customer Not Found!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h2 class="text-center py-md-4 py-sm-5">Customer Update</h2>
+
+    <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
+      <div th:insert="~{fragments/customer/customerViewSearchForm.html :: viewCustomerSearchForm}" class="col-10 col-lg-8"></div>
+      <div th:insert="~{fragments/common/personalInfoForm.html :: personalInfoForm}" class="col-11 col-md-10 col-lg-8 form-step active"></div>
+      <div th:insert="~{fragments/customer/customerAddressInfoForm.html :: customerAddressInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>
+    </div>
+    <!-- Hidden ID field -->
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{address.id}"/>
+  </form>
+</div>
+</body>
+</html>

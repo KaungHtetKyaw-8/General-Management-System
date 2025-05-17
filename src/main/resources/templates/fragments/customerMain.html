@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<main th:fragment="customerMain" class="container-fluid px-0">
+    <div class="d-flex vh-100">
+<!--        Side Bar Insert-->
+        <div th:insert="~{fragments/customer/customerSideBar.html :: sideBar}"></div>
+<!--        Main Section-->
+        <div class="main-content" th:switch="${navStatus}">
+<!--            <div th:case="'dashBoard'" th:insert="~{fragments/employee/employeeDashBoard.html :: employeeDashBoard}" ></div>-->
+            <div th:case="'cusView'" th:insert="~{fragments/customer/customerView.html :: customerView}"></div>
+            <div th:case="'cusAdd'" th:insert="~{fragments/customer/customerRegisterForm.html :: customerRegisterForm}"></div>
+            <div th:case="'cusUpdate'" th:insert="~{fragments/customer/customerUpdateForm.html :: customerUpdateForm}"></div>
+            <div th:case="'cusDelete'" th:insert="~{fragments/customer/customerDeleteForm.html :: customerDeleteForm}"></div>
+            <div th:case="'pointView'" th:insert="~{fragments/customer/pointCardView.html :: pointCardView}"></div>
+            <div th:case="'pointAdd'" th:insert="~{fragments/customer/pointCardRegisterForm.html :: pointCardRegisterForm}"></div>
+            <div th:case="'pointUpdate'" th:insert="~{fragments/customer/pointCardUpdateForm.html :: pointCardUpdateForm}"></div>
+            <div th:case="'pointDelete'" th:insert="~{fragments/customer/pointCardDeleteForm.html :: pointCardDeleteForm}"></div>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ public class Product {
     private String name;
     private double buyPrice;
     private double sellPrice;
-    private double count;
+    private Long count;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Vendor Info-->
+<div th:fragment="inventoryInfoForm">
+  <h5 class="my-2 text-center" th:text="#{header.inventory.product.sub}"></h5>
+  <div class="row row-cols-1 row-cols-md-2">
+
+    <!--    Vendor Select-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${vendorId}"
+               th:text="#{header.inventory.product.vendor}"
+               class="form-label"></label>
+        <select class="form-select selector"
+                th:field="*{vendorId}"
+                th:classappend="${#fields.hasErrors('vendorId')} ? 'form-control-invalid' : ''"
+                th:attr="data-target=${'#companyName'}">
+          <option th:if="${vendorList == null or vendorList.isEmpty()}" value="">Empty</option>
+          <option th:if="${vendorList != null or !vendorList.isEmpty()}" value="" selected>Choose...</option>
+          <option th:each="vendor : ${vendorList}"
+                  th:value="${vendor.id}"
+                  th:text="${vendor.firstName} + ' ' + ${vendor.lastName}"
+                  th:attr="data-change-value=${vendor.companyName}">
+          </option>
+        </select>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('vendorId')}"
+             th:errors="*{vendorId}">
+        </div>
+      </div>
+    </div>
+    <!--    Company Name-->
+    <!--   No Error For This Section -->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label for='companyName'
+               th:text="#{header.inventory.product.company}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               id='companyName' readonly>
+      </div>
+    </div>
+
+
+    <!--    Category Select-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${categoryId}"
+               th:text="#{header.inventory.product.category}"
+               class="form-label"></label>
+        <select class="form-select"
+                th:field="*{categoryId}"
+                th:classappend="${#fields.hasErrors('categoryId')} ? 'form-control-invalid' : ''">
+          <option th:if="${productCategoryList == null or productCategoryList.isEmpty()}" value=""> Empty </option>
+          <option th:if="${productCategoryList != null or !productCategoryList.isEmpty()}" value="" selected>Choose...</option>
+          <option th:each="category : ${productCategoryList}"
+                  th:value="${category.id}"
+                  th:text="${category.name}">
+          </option>
+        </select>
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('categoryId')}"
+             th:errors="*{categoryId}">
+        </div>
+      </div>
+    </div>
+
+
+<!--    Product Name-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${name}"
+               th:text="#{header.inventory.product.name}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{name}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('name')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}">
+        </div>
+      </div>
+    </div>
+
+    <!--    Product Buy Price-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${buyPrice}"
+               th:text="#{header.inventory.product.buyprice}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{buyPrice}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('buyPrice')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('buyPrice')}"
+             th:errors="*{buyPrice}">
+        </div>
+      </div>
+    </div>
+
+    <!--    Product Sell Price-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${sellPrice}"
+               th:text="#{header.inventory.product.sellprice}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{sellPrice}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('sellPrice')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('sellPrice')}"
+             th:errors="*{sellPrice}">
+        </div>
+      </div>
+    </div>
+
+    <!--    Product Count-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${count}"
+               th:text="#{header.inventory.product.count}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{count}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('count')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('count')}"
+             th:errors="*{count}">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>

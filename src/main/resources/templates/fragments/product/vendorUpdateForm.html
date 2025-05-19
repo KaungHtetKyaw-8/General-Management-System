@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="vendorUpdateForm" class="container-fluid text-light" >
+    <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateSuccess}?'show'">
+      <span>Update Complete!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateFail}?'show'">
+      <span>Update Fail!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${updateSearchNotFound}?'show'">
+      <span>Update Vendor Not Found!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h2 class="text-center py-md-4 py-sm-5">Vendor Update</h2>
+
+    <div class="row justify-content-center align-items-center align-items-md-start h-auto">
+        <form class="d-flex justify-content-center align-items-center align-items-md-start h-auto"
+              th:action="@{/vendor/update}" th:object="${searchQuery}" method="post">
+            <div th:insert="~{fragments/product/vendorManipulateSearchForm.html :: manipulateVendorSearchForm}" class="col-10 col-lg-8"></div>
+        </form>
+
+        <form class="d-flex justify-content-center align-items-center align-items-md-start h-auto"
+              th:action="@{/vendor/update}" th:object="${updateVendorDto}" method="post" id="multiForm">
+            <div th:insert="~{fragments/common/personalInfoForm.html :: personalInfoForm}" class="col-11 col-md-10 col-lg-8 form-step active"></div>
+            <div th:insert="~{fragments/common/addressInfoForm.html :: addressInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>
+            <div th:insert="~{fragments/product/vendorInfoForm.html :: vendorInfoForm}" class="col-11 col-md-10 col-lg-8 form-step"></div>
+
+            <!-- Hidden ID field -->
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{address.id}"/>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

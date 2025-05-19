@@ -26,6 +26,26 @@ prevBtn.forEach(btn => {
     });
 });
 
+// ***************************
+// select change and target value change
+// ***************************
+const selectors = document.querySelectorAll(".selector");
+
+selectors.forEach(selector =>  {
+    selector.addEventListener('change', () => {
+        const selectedOption = selector.options[selector.selectedIndex];
+        const changeValue = selectedOption.getAttribute('data-change-value');
+
+        const targetSelector = selector.getAttribute('data-target');
+        const target = document.querySelector(`${targetSelector}`);
+
+        if (target) {
+            target.value = changeValue;
+        }
+    });
+});
+
+
 
 // ***************************
 // Input Element Prevent Submit
@@ -108,36 +128,69 @@ function setupSuggestionInput(className, rendererMap, fetcherMap) {
         const customFetcher = fetcherMap[fetcherKey] || defaultFetcher;
 
         input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^a-zA-Z1-9]/g, '');
-            const query = input.value.trim().toLowerCase();
-            if (!query) {
-                if (input.nextElementSibling.className.includes('list-group')){
-                    input.nextElementSibling.remove();
+            clearTimeout(input.debounceTimeout);
+            input.debounceTimeout = setTimeout(() => {
+
+                input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+                const query = input.value.trim().toLowerCase();
+                if (!query) {
+                    if (input.nextElementSibling.className.includes('list-group')){
+                        input.nextElementSibling.remove();
+                    }
+                    return;
                 }
-                return;
-            }
 
-            const useData = data => {
-                customRenderer(data, query, input);
-            };
+                const useData = data => {
+                    customRenderer(data, query, input);
+                };
 
-            if (fetchCache[url] && fetcherConfig !== "repeat") {
-                useData(fetchCache[url]);
-            } else {
-                customFetcher(url,query)
-                    .then(data => {
-                        fetchCache[url] = data["data"];
-                        useData(fetchCache[url]);
-                    })
-                    .catch(err => {
-                        console.error('Suggestion fetch error:', err);
-                    });
-            }
+                if (fetchCache[url] && fetcherConfig !== "repeat") {
+                    useData(fetchCache[url]);
+                } else {
+                    customFetcher(url,query)
+                        .then(data => {
+                            fetchCache[url] = data["data"];
+                            useData(fetchCache[url]);
+                        })
+                        .catch(err => {
+                            console.error('Suggestion fetch error:', err);
+                        });
+                }
+            }, 300);
         });
     });
 }
 
 setupSuggestionInput('suggest-input', rendererMap, fetcherMap);
+
+
+// ***************************
+// Select and target Option List Create
+// ***************************
+function setupSelector(className, fetcherMap) {
+    const selectors = document.querySelectorAll(`.${className}`);
+
+    selectors.forEach(selector =>{
+        const target = document.querySelector('${selector.dataset.target}')
+        const url = selector.dataset.url;
+        const fetcherKey = selector.dataset.fetcher;
+
+        const customRenderer = rendererMap[rendererKey] || defaultRenderer;
+        const customFetcher = fetcherMap[fetcherKey] || defaultFetcher;
+
+        selector.addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const selectValue = selectedOption.getAttribute('data-value');
+            const target = this.getAttribute('data-target');
+            target.value = selectValue;
+        });
+    })
+}
+
+
+
+setupSelector('multi-selector', fetcherMap)
+
 
 
 // ***************************

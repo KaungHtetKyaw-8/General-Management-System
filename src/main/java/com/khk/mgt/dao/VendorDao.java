@@ -1,9 +1,19 @@
 package com.khk.mgt.dao;
 
 import com.khk.mgt.ds.Vendor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
-public interface VendorDao extends CrudRepository<Vendor, Integer> {
+public interface VendorDao extends JpaRepository<Vendor, Integer> {
+
+    Optional<Vendor> findById(Long id);
+
+    void deleteById(Long id);
+
+    List<Vendor> findByCompanyName(String companyName);
 }

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<main th:fragment="inventoryMain" class="container-fluid px-0">
+    <div class="d-flex vh-100">
+<!--        Side Bar Insert-->
+        <div th:insert="~{fragments/product/inventorySideBar.html :: sideBar}"></div>
+<!--        Main Section-->
+        <div class="main-content" th:switch="${navStatus}">
+<!--            <div th:case="'dashBoard'" th:insert="~{fragments/employee/employeeDashBoard.html :: employeeDashBoard}" ></div>-->
+            <div th:case="'vendorView'" th:insert="~{fragments/product/vendorView.html :: vendorView}"></div>
+            <div th:case="'vendorAdd'" th:insert="~{fragments/product/vendorRegisterForm.html :: vendorRegisterForm}"></div>
+            <div th:case="'vendorUpdate'" th:insert="~{fragments/product/vendorUpdateForm.html :: vendorUpdateForm}"></div>
+            <div th:case="'vendorDelete'" th:insert="~{fragments/product/vendorDeleteForm.html :: vendorDeleteForm}"></div>
+
+            <div th:case="'categoryView'" th:insert="~{fragments/product/inventoryView.html :: inventoryView}"></div>
+            <div th:case="'categoryAdd'" th:insert="~{fragments/product/inventoryRegisterForm.html :: inventoryRegisterForm}"></div>
+            <div th:case="'categoryUpdate'" th:insert="~{fragments/product/inventoryUpdateForm.html :: inventoryUpdateForm}"></div>
+            <div th:case="'categoryDelete'" th:insert="~{fragments/product/inventoryDeleteForm.html :: inventoryDeleteForm}"></div>
+
+            <div th:case="'inventoryView'" th:insert="~{fragments/product/inventoryView.html :: inventoryView}"></div>
+            <div th:case="'inventoryAdd'" th:insert="~{fragments/product/inventoryRegisterForm.html :: inventoryRegisterForm}"></div>
+            <div th:case="'inventoryUpdate'" th:insert="~{fragments/product/inventoryUpdateForm.html :: inventoryUpdateForm}"></div>
+            <div th:case="'inventoryDelete'" th:insert="~{fragments/product/inventoryDeleteForm.html :: inventoryDeleteForm}"></div>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>

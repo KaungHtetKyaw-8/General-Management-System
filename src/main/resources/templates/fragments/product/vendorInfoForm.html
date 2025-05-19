@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Vendor Info-->
+<div th:fragment="vendorInfoForm">
+  <h5 class="my-2 text-center" th:text="#{header.product.vendor.sub}"></h5>
+  <div class="row row-cols-1">
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${companyName}"
+               th:text="#{header.product.vendor.companyName}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{companyName}"
+               th:classappend="${#fields.hasErrors('companyName')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('companyName')}"
+             th:errors="*{companyName}">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-primary form-prev-btn">Previous</button>
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>

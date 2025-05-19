@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:fragment="sideBar" class="d-flex flex-column flex-shrink-0 bg-gradient vh-100 position-sticky top-0" style="width: 300px">
+        <a href="#" class="d-block p-3 text-white text-decoration-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-square me-2" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+            </svg>
+            <Span class="fs-5" th:text="#{header.navbar.inventory.title}"></Span>
+        </a>
+        <ul class="nav nav-pills d-flex flex-column flex-nowrap mb-auto text-start overflow-auto accordion" id="nav-accordion">
+            <li class="nav-item">
+                <a th:href="@{/vendor(nav=${'dashBoard'})}"
+                   th:classappend="${navStatus == 'dashBoard'}? 'active':''"
+                   class="nav-link py-3 text-white border-bottom"
+                   aria-current="page"
+                   title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   data-bs-title="Dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 20 20">
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z"/>
+                        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3"/>
+                    </svg>
+                    <span th:text="#{header.navbar.sub.title.dashboard}">Dashboard</span>
+                </a>
+            </li>
+
+<!--         Vendor Nav collapse-->
+            <li class="nav-item">
+                <a class="nav-link py-3 text-white border-bottom" data-bs-toggle="collapse" data-bs-target="#vendor-nav" aria-expanded="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 20 20">
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+                    </svg>
+                    <span>Vendor</span>
+                </a>
+                <div class="collapse"  id="vendor-nav" data-bs-parent="#nav-accordion">
+                    <ul class="nav nav-pills d-flex flex-column flex-nowrap mb-auto text-start overflow-auto ">
+                        <li class="nav-item">
+                            <a th:href="@{/vendor(nav=${'vendorView'})}"
+                               th:classappend="${navStatus == 'vendorView'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee View">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 20 20">
+                                    <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+                                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.view}">View</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/vendor(nav=${'vendorAdd'})}"
+                               th:classappend="${navStatus == 'vendorAdd'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                     class="bi bi-person-add" viewBox="0 0 20 20">
+                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                                    <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.add}">Add</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/vendor(nav=${'vendorUpdate'})}"
+                               th:classappend="${navStatus == 'vendorUpdate'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-check" viewBox="0 0 20 20">
+                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                                    <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.update}">Update</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/vendor(nav=${'vendorDelete'})}"
+                               th:classappend="${navStatus == 'vendorDelete'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Remove">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-dash" viewBox="0 0 20 20">
+                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                                    <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.remove}">Remove</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+<!--        Product Category Nav Collapse-->
+            <li class="nav-item">
+                <a class="nav-link py-3 text-white border-bottom" data-bs-toggle="collapse" data-bs-target="#product-category-nav" aria-expanded="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 20 20">
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    <span>Product Category</span>
+                </a>
+                <div class="collapse"  id="product-category-nav" data-bs-parent="#nav-accordion">
+                    <ul class="nav nav-pills d-flex flex-column flex-nowrap mb-auto text-start overflow-auto ">
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'categoryView'})}"
+                               th:classappend="${navStatus == 'categoryView'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee View">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-binoculars" viewBox="0 0 20 20">
+                                    <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.view}">View</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'categoryAdd'})}"
+                               th:classappend="${navStatus == 'categoryAdd'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 20 20">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.add}">Add</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'categoryUpdate'})}"
+                               th:classappend="${navStatus == 'categoryUpdate'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 20 20">
+                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.update}">Update</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'categoryDelete'})}"
+                               th:classappend="${navStatus == 'categoryDelete'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Remove">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 20 20">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.remove}">Remove</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+<!--         Product Nav Collapse-->
+            <li class="nav-item">
+                <a class="nav-link py-3 text-white border-bottom" data-bs-toggle="collapse" data-bs-target="#product-nav" aria-expanded="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 20 20">
+                        <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+                    </svg>
+                    <span>Product</span>
+                </a>
+                <div class="collapse"  id="product-nav" data-bs-parent="#nav-accordion">
+                    <ul class="nav nav-pills d-flex flex-column flex-nowrap mb-auto text-start overflow-auto ">
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'inventoryView'})}"
+                               th:classappend="${navStatus == 'inventoryView'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee View">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-binoculars" viewBox="0 0 20 20">
+                                    <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.view}">View</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'inventoryAdd'})}"
+                               th:classappend="${navStatus == 'inventoryAdd'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 20 20">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.add}">Add</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'inventoryUpdate'})}"
+                               th:classappend="${navStatus == 'inventoryUpdate'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 20 20">
+                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.update}">Update</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/inventory(nav=${'inventoryDelete'})}"
+                               th:classappend="${navStatus == 'inventoryDelete'}? 'active':''"
+                               class="nav-link py-3 text-white border-bottom"
+                               aria-current="page"
+                               title=""
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               data-bs-title="Employee Remove">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 20 20">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                </svg>
+                                <span th:text="#{header.navbar.sub.title.remove}">Remove</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+        </ul>
+        <div class="dropdown border-top">
+            <a href="#" class="d-flex align-items-center  p-3 link-light text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="true">
+                <img th:src="@{/assets/img/smiling-man.jpg}" alt="mdo" width="25" height="25" class="rounded-circle me-2">
+                <strong>Tester</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3" data-popper-placement="top-start" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -58.4px, 0px);">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

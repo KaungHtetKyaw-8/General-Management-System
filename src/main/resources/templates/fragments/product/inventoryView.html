@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="inventoryView"
+         class="container-fluid">
+        <h3 class="my-3">Inventory Products View</h3>
+        <div class="row">
+            <form th:insert="~{fragments/product/inventoryViewSearchForm.html :: viewInventorySearchForm}"
+                  th:action="@{/inventory/viewsearch}"
+                  th:object="${searchQuery}"
+                  method="post"
+                  class="col-12">
+            </form>
+            <!-- View Table -->
+            <div th:insert="~{fragments/product/inventoryTableView.html :: viewInventoryTable}"
+                 class="col-12 overflow-auto">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

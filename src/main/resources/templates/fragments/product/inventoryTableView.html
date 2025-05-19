@@ -1,0 +1,39 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewInventoryTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.inventory.product.id}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.name}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.category}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.buyprice}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.sellprice}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.count}" class="text-nowrap"></th>
+
+                <th th:text="#{header.inventory.product.vendor}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.company}" class="text-nowrap"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewInventoryDtoList == null or viewInventoryDtoList.isEmpty()}">
+                No Data
+            </tr>
+
+            <tr th:each="itemData : ${viewInventoryDtoList}">
+                <td th:text="${itemData.id}"></td>
+                <td th:text="${itemData.name}"></td>
+                <td th:text="${itemData.categoryName}"></td>
+                <td th:text="${itemData.buyPrice}"></td>
+                <td th:text="${itemData.sellPrice}"></td>
+                <td th:text="${itemData.count}"></td>
+
+                <td th:text="${itemData.vendorName}"></td>
+                <td th:text="${itemData.companyName}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

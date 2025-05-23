@@ -68,6 +68,14 @@ public class PointCardService {
         pointCardDao.save(pointCard);
     }
 
+    public void updatePointCardCount(Long pointCardId,Long Count){
+        PointCard pointCard = findById(pointCardId);
+
+        if(pointCard != null){
+            pointCard.setPoints(pointCard.getPoints() + Count);
+        }
+    }
+
     public void updatePointCard(PointCardDto pointCardDto){
         PointCard pointCard = findById(pointCardDto.getPointCardId());
 

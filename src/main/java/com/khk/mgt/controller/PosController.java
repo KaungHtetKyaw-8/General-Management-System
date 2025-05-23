@@ -44,7 +44,7 @@ public class PosController {
             orderService.saveOrder(orderDto);
             model.addAttribute("registerSuccess", true);
             model.addAttribute("addCategoryDto", new ProductCategoryDto());
-            return "posIndex";
+            return "redirect:/pos";
         }
     }
 

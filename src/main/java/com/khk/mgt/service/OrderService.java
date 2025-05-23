@@ -4,7 +4,7 @@ package com.khk.mgt.service;
 import com.khk.mgt.dao.OrdersDao;
 import com.khk.mgt.ds.*;
 import com.khk.mgt.dto.common.OrderDto;
-import com.khk.mgt.dto.common.ProductCategoryDto;
+import com.khk.mgt.util.PointConvert;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,22 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
 @Transactional
 public class OrderService {
-    @Value("${customer.dummy}")
-    private Long DUMMY_CUSTOMER;
+    @Value("${customer.dummy.id}")
+    private Long DUMMY_CUSTOMER_ID;
 
     @Autowired
     private CustomerService customerService;
 
     @Autowired
     private InventoryService inventoryService;
+
+    @Autowired
+    private PointCardService pointCardService;
 
     @Autowired
     private OrdersDao ordersDao;
@@ -90,7 +90,7 @@ public class OrderService {
         // Retrieve Customer Entity
         Customer customer;
         if (orderDto.getCustomerId() == null && orderDto.getPointCardId() == null) {
-            customer = customerService.findCustomerById(240L);
+            customer = customerService.findCustomerById(DUMMY_CUSTOMER_ID);
         }else if (orderDto.getCustomerId() != null){
             customer = customerService.findCustomerById(orderDto.getCustomerId());
         }else{
@@ -104,6 +104,9 @@ public class OrderService {
 
         // Save the Order
         Orders savedOrders = ordersDao.save(orders);
+
+        // Point Count
+        PointConvert pointConvert = new PointConvert();
 
         // Order Detail List Create
         orderDto.getItemList()
@@ -122,10 +125,18 @@ public class OrderService {
                     sellDetail.setQuantity(item.getProductQty());
                     sellDetail.setId(new SellDetailId(product.getId(), savedOrders.getId()));
 
+                    // Point Count Add
+                    pointConvert.setAndCalculatePoint(item.getProductQty(),product.getSellPrice());
+
                     // Detail List Add
                     savedOrders.addSellDetail(sellDetail);
                 });
 
+        if (!customer.getId().equals(DUMMY_CUSTOMER_ID) && orderDto.getPointCardId() != null) {
+            pointCardService.updatePointCardCount(orderDto.getPointCardId(),pointConvert.getPoint());
+        }
+
     }
+
 
 }

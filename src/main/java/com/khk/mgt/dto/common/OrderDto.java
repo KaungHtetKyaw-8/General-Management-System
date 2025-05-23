@@ -27,6 +27,5 @@ public class OrderDto {
     private Long pointCardId;
 
     public OrderDto() {
-        itemList = new ArrayList<OrderDetailDto>();
     }
 }

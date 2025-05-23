@@ -384,6 +384,11 @@ createNewChart('#employeeAge', fetcherMap, chartOptionMap)
 createNewChart('#employeeDepartment', fetcherMap, chartOptionMap)
 createNewChart('#employeeCity', fetcherMap, chartOptionMap)
 
+createNewChart('#customerGender', fetcherMap, chartOptionMap)
+createNewChart('#customerAge', fetcherMap, chartOptionMap)
+createNewChart('#customerCardCategory', fetcherMap, chartOptionMap)
+createNewChart('#customerPoints', fetcherMap, chartOptionMap)
+
 
 const colorList =  {
     def : [

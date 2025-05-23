@@ -2,6 +2,8 @@ package com.khk.mgt.service;
 
 import com.khk.mgt.dao.EmployeeDao;
 import com.khk.mgt.ds.Employee;
+import com.khk.mgt.dto.chart.GroupedLabelValue;
+import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.EmployeeDto;
 import com.khk.mgt.mapper.EmployeeMapper;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,6 +81,27 @@ public class EmployeeService {
         );
     }
 
+    // For Chart
+    public List<LabelValue> getCountByGender() {
+        return employeeDao.findCountByGender();
+    }
+
+    public List<LabelValue> getCountByDepartmentName() {
+        return employeeDao.findCountByDepartmentName();
+    }
+
+    public List<LabelValue> getCountByEmploymentType() {
+        return employeeDao.findCountByEmploymentType();
+    }
+
+    public List<GroupedLabelValue> getCountByCity() {
+        return employeeDao.findCountByCity();
+    }
+
+    public List<Date> getAllDateOfBirth() {
+        return employeeDao.findAllDateOfBirth();
+    }
+
 
     // For Rest
     public List<String> suggestDepartmentName(String departmentName) {
@@ -89,7 +113,4 @@ public class EmployeeService {
         Pageable top5 = PageRequest.of(0, 5);
         return employeeDao.findSuggestionEmploymentType(employmentType, top5);
     }
-
-
-
 }

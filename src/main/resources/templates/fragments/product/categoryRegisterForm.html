@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="categoryRegisterForm">
+  <!--Employee Register Form Done-->
+  <div class="container-fluid text-light" >
+    <form th:action="@{/category/add}" th:object="${addCategoryDto}" method="post" id="multiForm">
+      <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+           role="alert"
+           th:classappend="${registerSuccess}?'show'">
+        <span>Register Complete!</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+           role="alert"
+           th:classappend="${registerFail}?'show'">
+        <span>Register Fail!</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <h2 class="text-center py-md-4 py-sm-5">Product Category Registration</h2>
+      <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
+        <div th:insert="~{fragments/product/categoryInfoForm.html :: categoryInfoForm}" class="col-11 col-md-10 col-lg-8"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+</body>
+</html>

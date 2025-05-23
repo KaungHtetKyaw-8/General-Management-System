@@ -17,8 +17,4 @@ public class Employee extends Person{
     public Employee() {
     }
 
-//    public Employee init(){
-//        this.setAddress(new Address());
-//        return this;
-//    }
 }

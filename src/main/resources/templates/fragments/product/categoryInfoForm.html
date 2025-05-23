@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--				Product Category Info-->
+<div th:fragment="categoryInfoForm">
+  <h5 class="my-2 text-center" th:text="#{header.inventory.product.category.sub}"></h5>
+  <div class="row row-cols-1">
+
+<!--    Category Name-->
+    <div class="col">
+      <div class="mb-3 my-3">
+        <label th:for="${name}"
+               th:text="#{header.inventory.product.category.name}"
+               class="form-label"></label>
+        <input type="text" class="form-control"
+               th:field="*{name}"
+               th:autocomplete="#{autocomplete.status}"
+               th:classappend="${#fields.hasErrors('name')} ? 'form-control-invalid' : ''">
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>

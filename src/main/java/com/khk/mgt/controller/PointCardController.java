@@ -33,6 +33,10 @@ public class PointCardController {
         return "customerIndex";
     }
 
+    @GetMapping({"","/","home","index"})
+    public String index(Model model) {
+        return "redirect:/customer";
+    }
 
     @GetMapping(params = "nav")
     public String navChange(@RequestParam("nav") String navStatus, Model model) {

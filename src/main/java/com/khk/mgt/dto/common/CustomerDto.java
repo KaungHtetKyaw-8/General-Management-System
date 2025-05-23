@@ -4,9 +4,7 @@ import com.khk.mgt.ds.PointCard;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import java.sql.Date;
 import java.util.List;
 
 @Getter
@@ -23,12 +21,9 @@ public class CustomerDto extends PersonDto {
 
     @Override
     public String toString() {
-        return "EmployeeDto{" +
-                "firstname=" + getFirstName() +
-                "lastname=" + getLastName() +
-                "gender=" + getGender() +
-                "email=" + getEmail() +
-                "address=" + getAddress() +
+        return "CustomerDto{" +
+                "PersonDto=" + super.toString() +
+                "pointCard=" + pointCard +
                 '}';
     }
 }

@@ -2,9 +2,13 @@ package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class SellDetail {
 
     @EmbeddedId
@@ -20,8 +24,7 @@ public class SellDetail {
     @JoinColumn(name = "orders_id")
     private Orders orders;
 
-    private int quantity;
-    private double price;
+    private Long quantity;
 
     public SellDetail() {
     }

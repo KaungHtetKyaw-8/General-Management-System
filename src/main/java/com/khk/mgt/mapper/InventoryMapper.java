@@ -1,10 +1,7 @@
 package com.khk.mgt.mapper;
 
 import com.khk.mgt.ds.Product;
-import com.khk.mgt.ds.Vendor;
 import com.khk.mgt.dto.common.InventoryDto;
-import com.khk.mgt.dto.common.VendorDto;
-import org.springframework.beans.BeanUtils;
 
 
 public class InventoryMapper {

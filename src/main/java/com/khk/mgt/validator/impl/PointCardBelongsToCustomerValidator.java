@@ -1,6 +1,5 @@
 package com.khk.mgt.validator.impl;
 
-import com.khk.mgt.dao.PointCardDao;
 import com.khk.mgt.dto.common.PointCardDto;
 import com.khk.mgt.service.PointCardService;
 import com.khk.mgt.validator.annotations.ValidPointCardForCustomer;

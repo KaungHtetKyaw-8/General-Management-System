@@ -24,10 +24,8 @@ public class CustomerController {
 
     @GetMapping({"","/","home","index"})
     public String index(Model model) {
-//        model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
-//        model.addAttribute("navStatus", "dashBoard");
-//        model.addAttribute("newEmployees", employeeService.newest5Employees());
+        model.addAttribute("navStatus", "dashBoard");
+        model.addAttribute("newCustomers", customerService.getTop5RecentCustomers());
 
         return "customerIndex";
     }
@@ -38,7 +36,7 @@ public class CustomerController {
 
         switch (navStatus) {
             case "dashBoard":
-//                model.addAttribute("newEmployees", employeeService.newest5Employees());
+                model.addAttribute("newCustomers", customerService.getTop5RecentCustomers());
                 break;
             case "cusView":
                 model.addAttribute("viewCustomerDtoList", new ArrayList<CustomerDto>());

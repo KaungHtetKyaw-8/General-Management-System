@@ -1,6 +1,5 @@
 package com.khk.mgt.service;
 
-import com.khk.mgt.dao.EmployeeDao;
 import com.khk.mgt.dto.chart.*;
 import com.khk.mgt.mapper.ChartMapper;
 import com.khk.mgt.util.ColorUtil;
@@ -27,8 +26,17 @@ public class ChartsService {
     public static final int EMPLOYEE_AGE_RANGE = 1004;
     public static final int EMPLOYEE_CITY = 1005;
 
+    public static final int CUSTOMER_GENDER = 2001;
+    public static final int CUSTOMER_AGE_RANGE = 2002;
+    public static final int CUSTOMER_POINT_CARD_CATEGORY = 2003;
+    public static final int CUSTOMER_POINTS = 2004;
+
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
+
+    @Autowired
+    private CustomerService customerService;
+
 
     public ChartDto<PieAndDonutChartDataDetail> getDonutSingleDataChart(int chartName,String dataName,Long limit){
         // Get the data form the DB
@@ -60,19 +68,28 @@ public class ChartsService {
         return ChartMapper.toGroupedChartDto(rows,BarChartDataDetail::new);
     }
 
-    private List<LabelValue> selectSingleRepoData(int name){
-        return switch (name) {
-            case EMPLOYEE_GENDER -> employeeDao.findCountByGender();
-            case EMPLOYEE_DEPARTMENT -> employeeDao.findCountByDepartmentName();
-            case EMPLOYEE_EMPLOYMENT -> employeeDao.findCountByEmploymentType();
-            case EMPLOYEE_AGE_RANGE -> employeeAgeDifference(employeeDao.findAllDateOfBirth());
+    private List<LabelValue> selectSingleRepoData(int code){
+        return switch (code) {
+            // Employee
+            case EMPLOYEE_GENDER -> employeeService.getCountByGender();
+            case EMPLOYEE_DEPARTMENT -> employeeService.getCountByDepartmentName();
+            case EMPLOYEE_EMPLOYMENT -> employeeService.getCountByEmploymentType();
+            case EMPLOYEE_AGE_RANGE -> employeeAgeDifference(employeeService.getAllDateOfBirth());
+            // Customer
+            case CUSTOMER_GENDER -> customerService.getCountByGender();
+            case CUSTOMER_AGE_RANGE -> employeeAgeDifference(customerService.getAllDateOfBirth());
+            case CUSTOMER_POINT_CARD_CATEGORY -> customerService.getCountByPointCardCategory();
             default -> new ArrayList<>();
         };
     }
 
     private List<GroupedLabelValue> selectMultiRepoData(int name){
         return switch (name) {
-            case EMPLOYEE_CITY -> employeeDao.findCountByCity();
+            //Employee
+            case EMPLOYEE_CITY -> employeeService.getCountByCity();
+            // Customer
+            case CUSTOMER_POINTS -> customerService.getPointByGenderAndCardType();
+
             default -> new ArrayList<>();
         };
     }

@@ -33,6 +33,16 @@ public class ProductCategoryService {
         return productCategoryDao.findAll();
     }
 
+    public ProductCategoryDto getProductCategoryDtoById(Long id) {
+        ProductCategory productCategory = findProductCategoryById(id);
+
+        if (productCategory == null) {
+            return null;
+        }
+
+        return new ProductCategoryDto(productCategory.getId(), productCategory.getName());
+    }
+
     public List<ProductCategoryDto> getAllProductCategories() {
         List<ProductCategory> productCategories = productCategoryDao.findAll();
 

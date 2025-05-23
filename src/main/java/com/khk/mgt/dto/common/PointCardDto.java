@@ -1,20 +1,18 @@
 package com.khk.mgt.dto.common;
 
-import com.khk.mgt.ds.PointCard;
-import com.khk.mgt.ds.PointCardCategory;
 import com.khk.mgt.validator.annotations.CustomerId;
 import com.khk.mgt.validator.annotations.PointCardId;
 import com.khk.mgt.validator.annotations.ValidPointCardForCustomer;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
-import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @ValidPointCardForCustomer(groups = {OnUpdate.class, OnDelete.class})
 public class PointCardDto {
 

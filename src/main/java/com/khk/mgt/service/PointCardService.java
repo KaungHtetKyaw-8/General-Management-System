@@ -2,7 +2,6 @@ package com.khk.mgt.service;
 
 import com.khk.mgt.dao.PointCardCategoryDao;
 import com.khk.mgt.dao.PointCardDao;
-import com.khk.mgt.ds.Customer;
 import com.khk.mgt.ds.PointCard;
 import com.khk.mgt.ds.PointCardCategory;
 import com.khk.mgt.dto.common.PointCardDto;
@@ -13,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

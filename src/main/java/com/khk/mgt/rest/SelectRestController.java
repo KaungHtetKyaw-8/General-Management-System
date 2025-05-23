@@ -1,7 +1,6 @@
 package com.khk.mgt.rest;
 
 import com.khk.mgt.dto.common.SelectionDto;
-import com.khk.mgt.dto.common.SuggestionDto;
 import com.khk.mgt.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -14,10 +14,10 @@
             <div th:case="'vendorUpdate'" th:insert="~{fragments/product/vendorUpdateForm.html :: vendorUpdateForm}"></div>
             <div th:case="'vendorDelete'" th:insert="~{fragments/product/vendorDeleteForm.html :: vendorDeleteForm}"></div>
 
-            <div th:case="'categoryView'" th:insert="~{fragments/product/inventoryView.html :: inventoryView}"></div>
-            <div th:case="'categoryAdd'" th:insert="~{fragments/product/inventoryRegisterForm.html :: inventoryRegisterForm}"></div>
-            <div th:case="'categoryUpdate'" th:insert="~{fragments/product/inventoryUpdateForm.html :: inventoryUpdateForm}"></div>
-            <div th:case="'categoryDelete'" th:insert="~{fragments/product/inventoryDeleteForm.html :: inventoryDeleteForm}"></div>
+            <div th:case="'categoryView'" th:insert="~{fragments/product/categoryView.html :: cateogryView}"></div>
+            <div th:case="'categoryAdd'" th:insert="~{fragments/product/categoryRegisterForm.html :: categoryRegisterForm}"></div>
+            <div th:case="'categoryUpdate'" th:insert="~{fragments/product/categoryUpdateForm.html :: categoryUpdateForm}"></div>
+            <div th:case="'categoryDelete'" th:insert="~{fragments/product/categoryDeleteForm.html :: categoryDeleteForm}"></div>
 
             <div th:case="'inventoryView'" th:insert="~{fragments/product/inventoryView.html :: inventoryView}"></div>
             <div th:case="'inventoryAdd'" th:insert="~{fragments/product/inventoryRegisterForm.html :: inventoryRegisterForm}"></div>

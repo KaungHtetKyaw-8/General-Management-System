@@ -1,10 +1,8 @@
 package com.khk.mgt.controller;
 
-import com.khk.mgt.ds.Employee;
 import com.khk.mgt.dto.common.EmployeeDto;
 import com.khk.mgt.dto.common.OnCreate;
 import com.khk.mgt.dto.common.OnUpdate;
-import com.khk.mgt.mapper.EmployeeMapper;
 import com.khk.mgt.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +25,6 @@ public class EmployeeController {
 
     @GetMapping({"","/","home","index"})
     public String index(Model model) {
-//        model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
         model.addAttribute("navStatus", "dashBoard");
         model.addAttribute("newEmployees", employeeService.newest5Employees());
 

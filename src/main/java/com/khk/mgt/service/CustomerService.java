@@ -4,12 +4,16 @@ import com.khk.mgt.dao.CustomerDao;
 import com.khk.mgt.dao.PointCardCategoryDao;
 import com.khk.mgt.ds.Customer;
 import com.khk.mgt.ds.PointCard;
+import com.khk.mgt.dto.chart.GroupedLabelValue;
+import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.CustomerDto;
 import com.khk.mgt.dto.common.PointCardDto;
+import com.khk.mgt.dto.common.PosPointCardDto;
 import com.khk.mgt.mapper.CustomerMapper;
 import com.khk.mgt.mapper.PointCardMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +34,10 @@ public class CustomerService {
 
     public Customer findCustomerById(Long id) {
         return customerDao.findById(id).orElse(null);
+    }
+
+    public Customer findCustomerByPointCardId(Long pointCardId) {
+        return customerDao.findByPointCardId(pointCardId).orElse(null);
     }
 
     public boolean isCustomerExist(Long id) {
@@ -70,6 +78,38 @@ public class CustomerService {
         }
     }
 
+    public List<PosPointCardDto> getPointCardsByCustomerIdForPOS(Long id) {
+        List<PosPointCardDto> result = new ArrayList<>();
+        Customer findCustomer = customerDao.findById(id).orElse(null);
+
+        if (findCustomer != null) {
+            result = findCustomer
+                    .getPointCard()
+                    .stream()
+                    .map(item -> new PosPointCardDto(
+                            item.getCustomer().getId(),
+                            item.getCategory().getType(),
+                            item.getId())
+                    )
+                    .collect(Collectors.toList());
+            return result;
+        }else {
+            return null;
+        }
+    }
+
+    public PosPointCardDto getPointCardsByIdForPOS(Long id) {
+        PointCard findPointCard = customerDao.findPointCardById(id);
+
+        if (findPointCard != null) {
+            return new PosPointCardDto(findPointCard.getCustomer().getId(),
+                    findPointCard.getCategory().getType(),
+                    findPointCard.getId());
+        }else {
+            return null;
+        }
+    }
+
     public void updateCustomer(CustomerDto customerDto) {
         Customer existCus = customerDao.findById(customerDto.getId()).orElse(null);
         if (existCus != null) {
@@ -104,5 +144,29 @@ public class CustomerService {
 
         // Save the Customer
         customerDao.save(customer);
+    }
+
+    // For Chart
+    public List<CustomerDto> getTop5RecentCustomers() {
+        return customerDao.findRecent5Customers()
+                .stream()
+                .map(CustomerMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<LabelValue> getCountByPointCardCategory(){
+        return customerDao.findPointCardCategoryCount();
+    }
+
+    public List<LabelValue> getCountByGender(){
+        return customerDao.findCountByGender();
+    }
+
+    public List<Date> getAllDateOfBirth(){
+        return customerDao.findAllDateOfBirth();
+    }
+
+    public List<GroupedLabelValue> getPointByGenderAndCardType(){
+        return customerDao.findPointsGroupedByGenderAndPointCardType();
     }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="cateogryView"
+         class="container-fluid">
+        <h3 class="my-3">Product Category View</h3>
+        <div class="row">
+            <form th:insert="~{fragments/product/categoryViewSearchForm.html :: viewCategorySearchForm}"
+                  th:action="@{/category/viewsearch}"
+                  th:object="${searchQuery}"
+                  method="post"
+                  class="col-12">
+            </form>
+            <!-- View Table -->
+            <div th:insert="~{fragments/product/categoryTableView.html :: viewCategoryTable}"
+                 class="col-12 overflow-auto">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

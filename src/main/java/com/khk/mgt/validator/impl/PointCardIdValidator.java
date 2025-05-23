@@ -1,8 +1,6 @@
 package com.khk.mgt.validator.impl;
 
-import com.khk.mgt.service.CustomerService;
 import com.khk.mgt.service.PointCardService;
-import com.khk.mgt.validator.annotations.CustomerId;
 import com.khk.mgt.validator.annotations.PointCardId;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

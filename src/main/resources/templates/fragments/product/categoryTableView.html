@@ -1,0 +1,24 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewCategoryTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.inventory.product.category.id}" class="text-nowrap"></th>
+                <th th:text="#{header.inventory.product.category.name}" class="text-nowrap"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewCategoryDtoList == null or viewCategoryDtoList.isEmpty()}">
+                No Data
+            </tr>
+
+            <tr th:each="itemData : ${viewCategoryDtoList}">
+                <td th:text="${itemData.id}"></td>
+                <td th:text="${itemData.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

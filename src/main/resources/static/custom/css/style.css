@@ -29,6 +29,7 @@ body {
     padding: 0;
     background: var(--primary-bg-color);
     color: var(--primary-text-color);
+    background-repeat: no-repeat;
 }
 
 .primary-background{

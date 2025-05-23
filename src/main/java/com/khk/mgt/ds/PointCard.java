@@ -24,4 +24,14 @@ public class PointCard {
 
     public PointCard() {
     }
+
+    @Override
+    public String toString() {
+        return "PointCard{" +
+                "id=" + id +
+                ", registrationDate=" + registrationDate +
+                ", points=" + points +
+                ", category=" + category +
+                '}';
+    }
 }

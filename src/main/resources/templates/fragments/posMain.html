@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<main th:fragment="posMain" class="container-fluid">
+    <div th:insert="~{fragments/pos/orderForm.html :: orderForm}"></div>
+    <div class="alert alert-warning position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade d-none"
+         id="error-alert"
+         role="alert">
+        <span></span>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+</main>
+
+</body>
+</html>

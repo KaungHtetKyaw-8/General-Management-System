@@ -2,7 +2,6 @@ package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
 

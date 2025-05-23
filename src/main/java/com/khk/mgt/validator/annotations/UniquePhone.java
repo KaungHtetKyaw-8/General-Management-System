@@ -1,7 +1,6 @@
 package com.khk.mgt.validator.annotations;
 
 
-import com.khk.mgt.validator.impl.UniqueEmailValidator;
 import com.khk.mgt.validator.impl.UniquePhoneNumberValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

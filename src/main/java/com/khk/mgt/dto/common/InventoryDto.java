@@ -1,16 +1,16 @@
 package com.khk.mgt.dto.common;
 
-import com.khk.mgt.ds.ProductCategory;
-import com.khk.mgt.ds.Vendor;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NegativeOrZero;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class InventoryDto {
 
     private Long id;

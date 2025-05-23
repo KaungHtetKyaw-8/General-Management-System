@@ -1,16 +1,10 @@
 package com.khk.mgt.service;
 
-import com.khk.mgt.dao.PointCardCategoryDao;
-import com.khk.mgt.dao.ProductCategoryDao;
 import com.khk.mgt.dao.ProductDao;
-import com.khk.mgt.dao.VendorDao;
 import com.khk.mgt.ds.Product;
-import com.khk.mgt.ds.Vendor;
 import com.khk.mgt.dto.common.InventoryDto;
-import com.khk.mgt.dto.common.SelectionDto;
-import com.khk.mgt.dto.common.VendorDto;
+import com.khk.mgt.dto.common.PosProductDto;
 import com.khk.mgt.mapper.InventoryMapper;
-import com.khk.mgt.mapper.VendorMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +46,7 @@ public class InventoryService {
                 .collect(Collectors.toList());
     }
 
-    public InventoryDto getProductById(Long id) {
+    public InventoryDto getInventoryById(Long id) {
         Product product = productDao.findById(id).orElse(null);
 
         if (product == null) {
@@ -60,6 +54,30 @@ public class InventoryService {
         }
 
         return InventoryMapper.toDto(product);
+    }
+
+    public PosProductDto getProductById(Long id) {
+        Product product = productDao.findById(id).orElse(null);
+
+        if (product == null) {
+            return null;
+        }
+
+        return new PosProductDto(product.getId(),product.getName(),product.getCount(),product.getSellPrice());
+    }
+
+    public List<PosProductDto> getItemListByCategoryId(Long id) {
+        List<Product> products = productDao.findByCategory_Id(id);
+
+        if (products == null || products.isEmpty()) {
+            return null;
+        }
+
+        return products
+                .stream()
+                .map(item->{
+                    return new PosProductDto(item.getId(),item.getName(),item.getCount(),item.getSellPrice());
+                }).toList();
     }
 
     public List<InventoryDto> getVendorById(Long id) {
@@ -93,6 +111,12 @@ public class InventoryService {
         product.setCategory(productCategoryService.findProductCategoryById(inventoryDto.getCategoryId()));
 
         // Save the Customer
+        productDao.save(product);
+    }
+
+    public void updateProductQtyAdjust(Long id,Long qty){
+        Product product = findProductById(id);
+        product.setCount(product.getCount()-qty);
         productDao.save(product);
     }
 

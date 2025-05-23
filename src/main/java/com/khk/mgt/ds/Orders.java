@@ -2,13 +2,17 @@ package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +34,5 @@ public class Orders {
         sellDetail.setOrders(this);
         this.sellDetail.add(sellDetail);
     }
+
 }

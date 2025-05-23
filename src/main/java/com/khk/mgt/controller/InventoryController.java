@@ -1,6 +1,5 @@
 package com.khk.mgt.controller;
 
-import com.khk.mgt.ds.Product;
 import com.khk.mgt.dto.common.*;
 import com.khk.mgt.service.InventoryService;
 import com.khk.mgt.service.ProductCategoryService;
@@ -105,7 +104,7 @@ public class InventoryController {
                 break;
             // By Product ID
             case "2" :
-                result.add(inventoryService.getProductById(queryId));
+                result.add(inventoryService.getInventoryById(queryId));
                 break;
             // By Vendor ID
             case "3" :
@@ -157,7 +156,7 @@ public class InventoryController {
 
         try {
             long id = Long.parseLong(searchDto.getValue());
-            InventoryDto updateInventoryDto = inventoryService.getProductById(id);
+            InventoryDto updateInventoryDto = inventoryService.getInventoryById(id);
             model.addAttribute("updateInventoryDto", updateInventoryDto);
             if (updateInventoryDto == null) {
                 model.addAttribute("updateSearchNotFound",true);
@@ -207,7 +206,7 @@ public class InventoryController {
 
         try {
             long id = Long.parseLong(searchDto.getValue());
-            InventoryDto deleteInventoryDto = inventoryService.getProductById(id);
+            InventoryDto deleteInventoryDto = inventoryService.getInventoryById(id);
             model.addAttribute("deleteInventoryDto", deleteInventoryDto);
             if (deleteInventoryDto == null) {
                 model.addAttribute("deleteSearchNotFound",true);

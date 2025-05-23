@@ -32,11 +32,7 @@ public class EmployeeDto extends PersonDto {
     @Override
     public String toString() {
         return "EmployeeDto{" +
-                "firstname=" + getFirstName() +
-                "lastname=" + getLastName() +
-                "gender=" + getGender() +
-                "email=" + getEmail() +
-                "address=" + getAddress() +
+                "personDto=" + super.toString() +
                 "employmentDate=" + employmentDate +
                 ", employmentType='" + employmentType + '\'' +
                 ", departmentName='" + departmentName + '\'' +

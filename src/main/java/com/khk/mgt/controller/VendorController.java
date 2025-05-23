@@ -23,12 +23,7 @@ public class VendorController {
 
     @GetMapping({"","/","home","index"})
     public String index(Model model) {
-//        model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
-//        model.addAttribute("navStatus", "dashBoard");
-//        model.addAttribute("newEmployees", employeeService.newest5Employees());
-
-        return "inventoryIndex";
+        return "redirect:/inventory";
     }
 
     @GetMapping(params = "nav")
@@ -36,9 +31,6 @@ public class VendorController {
         model.addAttribute("navStatus", navStatus);
 
         switch (navStatus) {
-            case "dashBoard":
-//                model.addAttribute("newEmployees", employeeService.newest5Employees());
-                break;
             case "vendorView":
                 model.addAttribute("viewVendorDtoList", new ArrayList<VendorDto>());
                 model.addAttribute("searchQuery" , new SearchDto());

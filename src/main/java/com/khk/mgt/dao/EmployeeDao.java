@@ -1,7 +1,6 @@
 package com.khk.mgt.dao;
 
 import com.khk.mgt.ds.Employee;
-import com.khk.mgt.ds.Address;
 import com.khk.mgt.dto.chart.GroupedLabelValue;
 import com.khk.mgt.dto.chart.LabelValue;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
-import java.util.Collection;
 import java.util.List;
 
 @Repository

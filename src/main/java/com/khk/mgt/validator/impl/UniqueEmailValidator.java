@@ -1,6 +1,5 @@
 package com.khk.mgt.validator.impl;
 
-import com.khk.mgt.dao.EmployeeDao;
 import com.khk.mgt.service.EmployeeService;
 import com.khk.mgt.validator.annotations.UniqueMail;
 import jakarta.validation.ConstraintValidator;

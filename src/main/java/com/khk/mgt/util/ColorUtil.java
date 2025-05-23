@@ -1,5 +1,6 @@
 package com.khk.mgt.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +27,7 @@ public class ColorUtil {
             );
             return colorList;
         }else {
-            colorList = Arrays.asList(DEFAULT_COLOR);
+            colorList = new ArrayList<>(Arrays.asList(DEFAULT_COLOR));
             int generateColorCount = count - DEFAULT_COLOR.length;
             colorList.addAll(generatePastelColors(generateColorCount));
             return colorList;

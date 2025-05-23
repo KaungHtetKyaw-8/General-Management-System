@@ -31,10 +31,8 @@ public class InventoryController {
 
     @GetMapping({"","/","home","index"})
     public String index(Model model) {
-//        model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("employeeDtoList", new ArrayList<Employee>());
-//        model.addAttribute("navStatus", "dashBoard");
-//        model.addAttribute("newEmployees", employeeService.newest5Employees());
+        model.addAttribute("navStatus", "dashBoard");
+        model.addAttribute("dashBoardCategory", productCategoryService.getCategoryByProductCountAndTotalPrice());
 
         return "inventoryIndex";
     }
@@ -45,7 +43,7 @@ public class InventoryController {
 
         switch (navStatus) {
             case "dashBoard":
-//                model.addAttribute("newEmployees", employeeService.newest5Employees());
+                model.addAttribute("dashBoardCategory", productCategoryService.getCategoryByProductCountAndTotalPrice());
                 break;
             case "inventoryView":
                 model.addAttribute("viewInventoryDtoList", new ArrayList<InventoryDto>());

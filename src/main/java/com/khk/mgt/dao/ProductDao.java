@@ -17,12 +17,12 @@ public interface ProductDao extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
     List<Product> findByCategory_Id(Long categoryId);
 
-    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(p.name,COUNT(p)) FROM Product p GROUP BY p.name")
-    List<LabelValue> findCountByProductName();
+    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(v.companyName,COUNT(p)) FROM Product p JOIN p.vendor v GROUP BY v.companyName ORDER BY COUNT(p) DESC")
+    List<LabelValue> findProductCountByVendorCompany();
 
-    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(p.category.name,COUNT(p)) FROM Product p GROUP BY p.category")
-    List<LabelValue> findProductCountByCategory();
-
-    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(CONCAT(p.vendor.firstName,' ',p.vendor.lastName),COUNT(p)) FROM Product p GROUP BY p.vendor")
+    @Query("SELECT new com.khk.mgt.dto.chart.LabelValue(CONCAT(p.vendor.firstName,' ',p.vendor.lastName),COUNT(p)) FROM Product p GROUP BY p.vendor ORDER BY COUNT(p) DESC")
     List<LabelValue> findProductCountByVendor();
+
+    List<Product> findTop10ByOrderByBuyPriceDesc();
+
 }

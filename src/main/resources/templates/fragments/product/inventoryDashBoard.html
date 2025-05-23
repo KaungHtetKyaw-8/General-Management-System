@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
-    <div th:fragment="employeeDashBoard" class="row">
+    <div th:fragment="inventoryDashBoard" class="row">
         <div class="col-12 col-lg-4">
             <div class="chart-container"
                  id="char1"
-                 th:data-url="@{/api/employee/chart/gender}"
-                 data-name="Gender Group"
+                 th:data-url="@{/api/inventory/chart/vendor/gender}"
+                 data-name="Vendor Gender Group"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -18,8 +14,8 @@
         <div class="col-12 col-lg-4 mt-5 mt-lg-0">
             <div class="chart-container"
                  id="char2"
-                 th:data-url="@{/api/employee/chart/age}"
-                 data-name="Age Range Group"
+                 th:data-url="@{/api/inventory/chart/vendor}"
+                 data-name="Product By Vendor Group"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -27,37 +23,37 @@
         <div class="col-12 col-lg-4 mt-5 mt-lg-0">
             <div class="chart-container"
                  id="char3"
-                 th:data-url="@{/api/employee/chart/department}"
-                 data-name="Department Group"
+                 th:data-url="@{/api/inventory/chart/company}"
+                 data-name="Product By Company Group"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
         </div>
-        <div class="col-12 col-lg-6 mt-5" style="height: 300px">
+        <div class="col-12 col-lg-6 mt-5 mt-lg-0" style="height: 300px">
             <div class="chart-container"
                  id="char4"
-                 th:data-url="@{/api/employee/chart/city}"
-                 data-name="Employee City Group"
+                 th:data-url="@{/api/inventory/chart/price}"
+                 data-name="Price Range Group"
                  data-charttype="bar">
                 <canvas></canvas>
             </div>
         </div>
 
         <div class="col-12 col-lg-6 pt-md-0 pt-lg-3 mt-5">
-            <h4 th:text="#{header.employee.dashboard.sub}"></h4>
+            <h4 th:text="#{header.inventory.dashboard.sub}"></h4>
             <table class="table-style w-100 view-table">
                 <thead>
                     <tr class="w-100">
-                        <th th:text="#{header.person.firstName}"></th>
-                        <th th:text="#{header.person.lastName}"></th>
-                        <th th:text="#{header.employee.empDate}"></th>
+                        <th th:text="#{header.inventory.product.category.name}"></th>
+                        <th th:text="#{header.inventory.product.count}"></th>
+                        <th th:text="#{header.inventory.product.category.total}"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="itemData : ${newEmployees}">
-                        <td th:text="${itemData.firstName}"></td>
-                        <td th:text="${itemData.lastName}"></td>
-                        <td th:text="${itemData.employmentDate}"></td>
+                    <tr th:each="itemData : ${dashBoardCategory}">
+                        <td th:text="${itemData.name}"></td>
+                        <td th:text="${itemData.count}"></td>
+                        <td th:text="${itemData.totalPrice}"></td>
                     </tr>
                 </tbody>
             </table>

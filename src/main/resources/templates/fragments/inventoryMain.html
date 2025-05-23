@@ -8,7 +8,7 @@
         <div th:insert="~{fragments/product/inventorySideBar.html :: sideBar}"></div>
 <!--        Main Section-->
         <div class="main-content" th:switch="${navStatus}">
-<!--            <div th:case="'dashBoard'" th:insert="~{fragments/employee/employeeDashBoard.html :: employeeDashBoard}" ></div>-->
+            <div th:case="'dashBoard'" th:insert="~{fragments/product/inventoryDashBoard.html :: inventoryDashBoard}" ></div>
             <div th:case="'vendorView'" th:insert="~{fragments/product/vendorView.html :: vendorView}"></div>
             <div th:case="'vendorAdd'" th:insert="~{fragments/product/vendorRegisterForm.html :: vendorRegisterForm}"></div>
             <div th:case="'vendorUpdate'" th:insert="~{fragments/product/vendorUpdateForm.html :: vendorUpdateForm}"></div>

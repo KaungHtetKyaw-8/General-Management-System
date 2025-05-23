@@ -3,6 +3,7 @@ package com.khk.mgt.service;
 import com.khk.mgt.dao.PointCardCategoryDao;
 import com.khk.mgt.dao.VendorDao;
 import com.khk.mgt.ds.Vendor;
+import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.SelectionDto;
 import com.khk.mgt.dto.common.VendorDto;
 import com.khk.mgt.mapper.VendorMapper;
@@ -56,6 +57,10 @@ public class VendorService {
         return vendorDao.findByCompanyName(companyName).stream()
                 .map(vendor -> new SelectionDto(vendor.getId(),vendor.getFirstName() + " " + vendor.getLastName()))
                 .collect(Collectors.toList());
+    }
+
+    public List<LabelValue> getCountByGender(){
+        return vendorDao.findCountByGender();
     }
 
     

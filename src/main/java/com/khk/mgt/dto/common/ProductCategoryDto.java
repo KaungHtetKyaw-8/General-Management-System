@@ -17,6 +17,20 @@ public class ProductCategoryDto {
     @NotBlank(message = "Category Name must not be blank",groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
+    private Long count;
+    private Double totalPrice;
+
     public ProductCategoryDto() {
+    }
+
+    public ProductCategoryDto(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public ProductCategoryDto(String name, Long count, Double totalPrice) {
+        this.name = name;
+        this.count = count;
+        this.totalPrice = totalPrice;
     }
 }

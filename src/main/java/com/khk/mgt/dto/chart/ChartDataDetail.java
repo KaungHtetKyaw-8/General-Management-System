@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ChartDataDetail {
     String label;
-    List<Long> data;
+    List<Number> data;
     List<String> backgroundColor;
 
     public ChartDataDetail() {

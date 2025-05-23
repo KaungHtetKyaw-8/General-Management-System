@@ -8,7 +8,7 @@
     <div th:fragment="customerDashBoard" class="row">
         <div class="col-12 col-lg-4">
             <div class="chart-container"
-                 id="customerGender"
+                 id="char1"
                  th:data-url="@{/api/customer/chart/gender}"
                  data-name="Gender Group"
                  data-charttype="doughnut">
@@ -17,7 +17,7 @@
         </div>
         <div class="col-12 col-lg-4 mt-5 mt-lg-0">
             <div class="chart-container"
-                 id="customerAge"
+                 id="char2"
                  th:data-url="@{/api/customer/chart/age}"
                  data-name="Age Range Group"
                  data-charttype="doughnut">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-12 col-lg-4 mt-5 mt-lg-0">
             <div class="chart-container"
-                 id="customerCardCategory"
+                 id="char3"
                  th:data-url="@{/api/customer/chart/categorisation}"
                  data-name="Card Category Group"
                  data-charttype="doughnut">
@@ -35,7 +35,7 @@
         </div>
         <div class="col-12 col-lg-6 mt-5 mt-lg-0" style="height: 300px">
             <div class="chart-container"
-                 id="customerPoints"
+                 id="char4"
                  th:data-url="@{/api/customer/chart/points}"
                  data-name="Customer Point Group"
                  data-charttype="bar">

@@ -2,6 +2,8 @@ package com.khk.mgt.service;
 
 import com.khk.mgt.dao.ProductDao;
 import com.khk.mgt.ds.Product;
+import com.khk.mgt.dto.chart.GroupedLabelValue;
+import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.InventoryDto;
 import com.khk.mgt.dto.common.PosProductDto;
 import com.khk.mgt.mapper.InventoryMapper;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,6 +105,32 @@ public class InventoryService {
         return product.stream()
                 .map(InventoryMapper::toDto)
                 .toList();
+    }
+
+    public List<LabelValue> getVendorGenderCount(){
+        return vendorService.getCountByGender();
+    }
+
+    public List<LabelValue> getCountByVendor(){
+        return productDao.findProductCountByVendor();
+    }
+
+    public List<LabelValue> getCountByVendorCompany(){
+        return productDao.findProductCountByVendorCompany();
+    }
+
+    public List<GroupedLabelValue> getMultiChartDataByBuyPrice(){
+        List<Product> productList = productDao.findTop10ByOrderByBuyPriceDesc();
+
+        List<GroupedLabelValue> result = new ArrayList<>();
+
+        productList.forEach(item->{
+            result.add(new GroupedLabelValue(item.getName(),"SellPrice",item.getSellPrice()));
+            result.add(new GroupedLabelValue(item.getName(),"BuyPrice",item.getBuyPrice()));
+            result.add(new GroupedLabelValue(item.getName(),"Profit",item.getSellPrice() - item.getBuyPrice()));
+        });
+
+        return result;
     }
     
     public void saveProduct(InventoryDto inventoryDto) {

@@ -57,6 +57,10 @@ public class ProductCategoryService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductCategoryDto> getCategoryByProductCountAndTotalPrice() {
+        return productCategoryDao.getCategoryDtoByProductCountAndTotalPrice().stream().limit(5).collect(Collectors.toList());
+    }
+
     public void saveProductCategory(ProductCategoryDto productCategoryDto) {
         // Create Product Category Entity
         ProductCategory productCategory = new ProductCategory();

@@ -31,11 +31,19 @@ public class ChartsService {
     public static final int CUSTOMER_POINT_CARD_CATEGORY = 2003;
     public static final int CUSTOMER_POINTS = 2004;
 
+    public static final int INVENTORY_VENDOR_BY_GENDER = 3001;
+    public static final int INVENTORY_PRODUCT_BY_VENDOR = 3002;
+    public static final int INVENTORY_PRODUCT_BY_COMPANY = 3003;
+    public static final int INVENTORY_PRICE_RANGE = 3004;
+
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private InventoryService inventoryService;
 
 
     public ChartDto<PieAndDonutChartDataDetail> getDonutSingleDataChart(int chartName,String dataName,Long limit){
@@ -79,6 +87,10 @@ public class ChartsService {
             case CUSTOMER_GENDER -> customerService.getCountByGender();
             case CUSTOMER_AGE_RANGE -> employeeAgeDifference(customerService.getAllDateOfBirth());
             case CUSTOMER_POINT_CARD_CATEGORY -> customerService.getCountByPointCardCategory();
+            // Inventory
+            case INVENTORY_VENDOR_BY_GENDER -> inventoryService.getVendorGenderCount();
+            case INVENTORY_PRODUCT_BY_VENDOR -> inventoryService.getCountByVendor();
+            case INVENTORY_PRODUCT_BY_COMPANY -> inventoryService.getCountByVendorCompany();
             default -> new ArrayList<>();
         };
     }
@@ -89,7 +101,8 @@ public class ChartsService {
             case EMPLOYEE_CITY -> employeeService.getCountByCity();
             // Customer
             case CUSTOMER_POINTS -> customerService.getPointByGenderAndCardType();
-
+            // Inventory
+            case INVENTORY_PRICE_RANGE -> inventoryService.getMultiChartDataByBuyPrice();
             default -> new ArrayList<>();
         };
     }

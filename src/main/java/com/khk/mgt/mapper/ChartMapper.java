@@ -27,7 +27,7 @@ public class ChartMapper {
         dataset.setLabel(datasetLabel);
 
         // Set dataset values
-        List<Long> values = source.stream()
+        List<Number> values = source.stream()
                 .map(LabelValue::getValue)
                 .collect(Collectors.toList());
         dataset.setData(values);
@@ -52,7 +52,7 @@ public class ChartMapper {
         chartDto.setLabels(new ArrayList<>(uniqueLabels));
 
         // Group values by dataset (e.g., "Male", "Female") → label → value
-        Map<String, Map<String, Long>> groupedData = source.stream()
+        Map<String, Map<String, Number>> groupedData = source.stream()
                 .collect(Collectors.groupingBy(
                         GroupedLabelValue::getGroup,
                         Collectors.toMap(
@@ -67,12 +67,12 @@ public class ChartMapper {
         int colorIndex = 0;
 
         // Convert to datasets
-        for (Map.Entry<String, Map<String, Long>> entry : groupedData.entrySet()) {
+        for (Map.Entry<String, Map<String, Number>> entry : groupedData.entrySet()) {
             T dataset = datasetSupplier.get();
             dataset.setLabel(entry.getKey());
 
 
-            List<Long> values = uniqueLabels.stream()
+            List<Number> values = uniqueLabels.stream()
                     .map(label -> entry.getValue().getOrDefault(label, 0L))
                     .collect(Collectors.toList());
 

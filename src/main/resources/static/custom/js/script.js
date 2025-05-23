@@ -186,11 +186,7 @@ function setupSelector(className, fetcherMap) {
         });
     })
 }
-
-
-
 setupSelector('multi-selector', fetcherMap)
-
 
 
 // ***************************
@@ -251,46 +247,9 @@ function suggestionListCreate(data,input){
 }
 
 
-
-
-
-// ***************************
-// Custom Collapse
-// ***************************
-
-// const collapseElementList = document.querySelectorAll('.custom-collapse');
-// const collapseList = [...collapseElementList].map(collapseEl => new bootstrap.Collapse(collapseEl, {
-//     toggle: false,
-//     delay : {
-//         show:10000,
-//         hide:150
-//     }
-// }));
-//
-//
-// const sideBar = document.getElementById("sidebar");
-//
-// if (sideBar){
-//     sideBar.addEventListener("mouseenter", () => {
-//         sideBar.style.width= '100%';
-//         collapseList.forEach(value => {
-//             value.show();
-//         });
-//     });
-//
-//     sideBar.addEventListener("mouseleave", () => {
-//         collapseList.forEach(value => value.hide());
-//         sideBar.style.width= '4.5rem';
-//     });
-// }
-
-
-
 // ***************************
 // Charts
 // ***************************
-
-
 const chartOptionMap = {
     donutAndPieOption : {
         maintainAspectRatio: false,
@@ -379,80 +338,7 @@ function createNewChart(idName,fetcher,option){
         });
 };
 
-createNewChart('#employeeGender', fetcherMap, chartOptionMap)
-createNewChart('#employeeAge', fetcherMap, chartOptionMap)
-createNewChart('#employeeDepartment', fetcherMap, chartOptionMap)
-createNewChart('#employeeCity', fetcherMap, chartOptionMap)
-
-createNewChart('#customerGender', fetcherMap, chartOptionMap)
-createNewChart('#customerAge', fetcherMap, chartOptionMap)
-createNewChart('#customerCardCategory', fetcherMap, chartOptionMap)
-createNewChart('#customerPoints', fetcherMap, chartOptionMap)
-
-
-const colorList =  {
-    def : [
-        '#FFF1C9',
-        '#F7B7A3',
-        '#EA5F89',
-        '#9B3192',
-        '#57167E',
-        '#2B0B3F'
-    ],
-    def_transparent : [
-        '#FFF1C94C',
-        '#F7B7A34C',
-        '#EA5F894C',
-        '#9B31924C',
-        '#57167E4C',
-        '#2B0B3F4C'
-    ],
-    balance : [
-        '#017AC9',
-        '#D43A3A',
-        '#FD7B0A',
-        '#EDEE55',
-        '#63A92D',
-        '#6C4BA4'
-    ],
-    balance_transparent : [
-        '#017AC94C',
-        '#D43A3A4C',
-        '#FD7B0A4C',
-        '#EDEE554C',
-        '#63A92D4C',
-        '#6C4BA44C'
-    ],
-    colorful : [
-        '#ffec21',
-        '#378aff',
-        '#ffa32f',
-        '#f54f52',
-        '#93f03b',
-        '#9552ea'
-    ],
-    colorful_transparent : [
-        '#ffec214C',
-        '#378aff4C',
-        '#ffa32f4C',
-        '#f54f524C',
-        '#93f03b4C',
-        '#9552ea4C'
-    ],
-    rainbow : [
-        '#52D726',
-        '#FFEC00',
-        '#FF7300',
-        '#FF0000',
-        '#007ED6',
-        '#7CDDDD'
-    ],
-    rainbow_transparent : [
-        '#52D7264C',
-        '#FFEC004C',
-        '#FF73004C',
-        '#FF00004C',
-        '#007ED64C',
-        '#7CDDDD4C'
-    ]
-};
+createNewChart('#char1', fetcherMap, chartOptionMap)
+createNewChart('#char2', fetcherMap, chartOptionMap)
+createNewChart('#char3', fetcherMap, chartOptionMap)
+createNewChart('#char4', fetcherMap, chartOptionMap)

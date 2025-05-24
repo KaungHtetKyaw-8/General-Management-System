@@ -1,8 +1,6 @@
 package com.khk.mgt.controller;
 
-import com.khk.mgt.dto.common.EmployeeDto;
-import com.khk.mgt.dto.common.OnCreate;
-import com.khk.mgt.dto.common.OnUpdate;
+import com.khk.mgt.dto.common.*;
 import com.khk.mgt.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +39,18 @@ public class EmployeeController {
                 break;
             case "empView":
                 model.addAttribute("viewEmployeesDtoList", new ArrayList<EmployeeDto>());
-                model.addAttribute("searchQuery" , "");
+                model.addAttribute("searchQuery" , new SearchDto());
                 break;
             case "empAdd":
                 model.addAttribute("addEmployeeDto", new EmployeeDto());
                 break;
             case "empUpdate":
                 model.addAttribute("updateEmployeeDto", new EmployeeDto());
-                model.addAttribute("searchQuery" , "");
+                model.addAttribute("searchQuery" , new SearchDto());
                 break;
             case "empDelete":
                 model.addAttribute("deleteEmployeeDto", new EmployeeDto());
-                model.addAttribute("searchQuery" , "");
+                model.addAttribute("searchQuery" , new SearchDto());
                 break;
             default:
         }
@@ -60,17 +58,51 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/viewsearch",params = "search")
-    public String viedSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
+    public String viedSearch(@ModelAttribute("searchQuery") SearchDto searchDto, BindingResult bindingResult, Model model) {
+
+        model.addAttribute("navStatus", "empView");
+        model.addAttribute("searchQuery" , searchDto);
 
         if (bindingResult.hasErrors()) {
             return "employeeIndex";
         }
+        long queryId = 0L;
 
-        List<EmployeeDto> viewEmployeesDtoList = employeeService.searchIdOrName(query);
-        System.out.println("Search Result : " + viewEmployeesDtoList);
-        model.addAttribute("navStatus", "empView");
-        model.addAttribute("searchQuery" , query);
-        model.addAttribute("viewEmployeesDtoList", viewEmployeesDtoList);
+        if (!searchDto.getSearchType().equals("1")){
+            try {
+                queryId = Long.parseLong(searchDto.getValue());
+            }catch (NumberFormatException e) {
+                model.addAttribute("viewEmployeesDtoList", new ArrayList<VendorDto>());
+                model.addAttribute("viewFailForNumber", true);
+                return "employeeIndex";
+            }
+        }
+
+        List<EmployeeDto> result = new ArrayList<>();
+
+        switch (searchDto.getSearchType()) {
+            // ALL
+            case "1" :
+                result = employeeService.getAllEmployees();
+                break;
+            // By Employee ID
+            case "2" :
+                EmployeeDto employeeDto = employeeService.getEmployeeById(queryId);
+                if (employeeDto != null) {
+                    result.add(employeeDto);
+                }
+                break;
+            default:
+                result = new ArrayList<>();
+        }
+
+        if (result != null && !result.isEmpty()) {
+            model.addAttribute("viewEmployeesDtoList", result);
+        }else{
+            model.addAttribute("viewEmployeesDtoList", new ArrayList<EmployeeDto>());
+            model.addAttribute("viewFail", true);
+        }
+
         return "employeeIndex";
     }
 
@@ -94,28 +126,27 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/update",params = "search")
-    public String employeeUpdateSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
+    public String employeeUpdateSearch(@Validated @ModelAttribute("searchQuery") SearchDto searchDto,BindingResult bindingResult, Model model) {
 
         model.addAttribute("navStatus", "empUpdate");
+        model.addAttribute("searchQuery" , searchDto);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("updateEmployeeDto", new EmployeeDto());
             return "employeeIndex";
         }
 
         try {
-            long id = Long.parseLong(query);
+            long id = Long.parseLong(searchDto.getValue());
             EmployeeDto updateEmployeesDto = employeeService.getEmployeeById(id);
             model.addAttribute("updateEmployeeDto", updateEmployeesDto);
-            model.addAttribute("searchQuery" , "");
             if (updateEmployeesDto == null) {
                 model.addAttribute("updateSearchNotFound",true);
                 model.addAttribute("updateEmployeeDto", new EmployeeDto());
-                model.addAttribute("searchQuery" , query);
             }
         }catch (NumberFormatException e) {
             model.addAttribute("updateSearchNotFound",true);
             model.addAttribute("updateEmployeeDto", new EmployeeDto());
-            model.addAttribute("searchQuery" , query);
         }
 
         return "employeeIndex";
@@ -124,6 +155,7 @@ public class EmployeeController {
     @PostMapping(value = "/update",params = "submit")
     public String employeeUpdate(@Validated(OnUpdate.class) @ModelAttribute("updateEmployeeDto") EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
         model.addAttribute("navStatus", "empUpdate");
+        model.addAttribute("searchQuery" , new SearchDto());
 
         if (bindingResult.hasErrors()) {
             // process the form error
@@ -141,28 +173,27 @@ public class EmployeeController {
 
 
     @PostMapping(value = "/delete",params = "search")
-    public String employeeDeleteSearch(@ModelAttribute("searchQuery") String query,BindingResult bindingResult, Model model) {
+    public String employeeDeleteSearch(@Validated @ModelAttribute("searchQuery") SearchDto searchDto,BindingResult bindingResult, Model model) {
 
         model.addAttribute("navStatus", "empDelete");
+        model.addAttribute("searchQuery" , searchDto);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("deleteEmployeeDto", new EmployeeDto());
             return "employeeIndex";
         }
 
         try {
-            long id = Long.parseLong(query);
+            long id = Long.parseLong(searchDto.getValue());
             EmployeeDto deleteEmployeesDto = employeeService.getEmployeeById(id);
             model.addAttribute("deleteEmployeeDto", deleteEmployeesDto);
-            model.addAttribute("searchQuery" , "");
             if (deleteEmployeesDto == null) {
                 model.addAttribute("deleteSearchNotFound",true);
                 model.addAttribute("deleteEmployeeDto", new EmployeeDto());
-                model.addAttribute("searchQuery" , query);
             }
         }catch (NumberFormatException e) {
             model.addAttribute("deleteSearchNotFound",true);
             model.addAttribute("deleteEmployeeDto", new EmployeeDto());
-            model.addAttribute("searchQuery" , query);
         }
 
         return "employeeIndex";
@@ -171,6 +202,7 @@ public class EmployeeController {
     @PostMapping(value = "/delete",params = "submit")
     public String employeeDelete(@Validated(OnUpdate.class) @ModelAttribute("deleteEmployeeDto") EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
         model.addAttribute("navStatus", "empDelete");
+        model.addAttribute("searchQuery" , new SearchDto());
 
         if (bindingResult.hasErrors()) {
             // process the form error

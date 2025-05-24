@@ -32,8 +32,8 @@ prevBtn.forEach(btn => {
 const selectors = document.querySelectorAll(".selector");
 
 selectors.forEach(selector =>  {
-    selector.addEventListener('change', () => {
-        const selectedOption = selector.options[selector.selectedIndex];
+    selector.addEventListener('change', evt => {
+        const selectedOption = evt.target.selectedOptions[0];
         const changeValue = selectedOption.getAttribute('data-change-value');
 
         const targetSelector = selector.getAttribute('data-target');

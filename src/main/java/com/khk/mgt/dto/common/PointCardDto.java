@@ -13,7 +13,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-@ValidPointCardForCustomer(groups = {OnUpdate.class, OnDelete.class})
+@ValidPointCardForCustomer(message = "{input.field.validation.pointcard.and.customer.match}", groups = {OnUpdate.class, OnDelete.class})
 public class PointCardDto {
 
     @NotNull(message = "{input.field.validation.pointcard.customer.id.notblank}", groups = {OnCreate.class, OnUpdate.class, OnDelete.class})

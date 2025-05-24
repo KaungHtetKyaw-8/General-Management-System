@@ -5,6 +5,7 @@ import com.khk.mgt.ds.Employee;
 import com.khk.mgt.dto.chart.GroupedLabelValue;
 import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.EmployeeDto;
+import com.khk.mgt.mapper.CustomerMapper;
 import com.khk.mgt.mapper.EmployeeMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class EmployeeService {
     private EmployeeDao employeeDao;
 
     // ThymeLeaf
-    public List<Employee> getAllEmployees() {
-        return new ArrayList<>(employeeDao.findAll());
+    public List<EmployeeDto> getAllEmployees() {
+        return employeeDao.findAll()
+                .stream().map(EmployeeMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public boolean emailExists(String email) {
@@ -35,7 +38,9 @@ public class EmployeeService {
     }
 
     public EmployeeDto getEmployeeById(long id) {
-        return EmployeeMapper.toDto(employeeDao.findById(id));
+        return employeeDao.findById(id)
+                .map(EmployeeMapper::toDto)
+                .orElse(null);
     }
 
     public List<EmployeeDto> searchIdOrName(String keyword) {
@@ -53,7 +58,7 @@ public class EmployeeService {
     }
 
     public void updateEmployee(EmployeeDto employee) {
-        Employee existEmp = employeeDao.findById(employee.getId());
+        Employee existEmp = employeeDao.findById(employee.getId()).orElse(null);
         if (existEmp != null) {
             Employee updateEmp = EmployeeMapper.toEntity(employee);
             BeanUtils.copyProperties(updateEmp, existEmp, "id", "address");

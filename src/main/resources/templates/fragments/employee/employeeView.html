@@ -5,8 +5,9 @@
          class="container-fluid">
         <h3 class="my-3" th:text="#{header.employee.sub.view}"></h3>
         <div class="row">
-            <form th:insert="~{fragments/employee/emloyeeViewSearchForm.html :: viewEmployeeSearchForm}"
+            <form th:insert="~{fragments/employee/employeeViewSearchForm.html :: viewEmployeeSearchForm}"
                   th:action="@{/employees/viewsearch}"
+                  th:object="${searchQuery}"
                   method="post"
                   class="col-12">
             </form>
@@ -14,6 +15,19 @@
             <div th:insert="~{fragments/employee/employeeTableView.html :: viewEmployeeTable}"
                  class="col-12 overflow-auto">
             </div>
+        </div>
+
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFail}?'show'">
+            <span th:text="#{header.employee.alert.search.notfound}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFailForNumber}?'show'">
+            <span th:text="#{header.employee.alert.search.mustnumber}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
 </body>

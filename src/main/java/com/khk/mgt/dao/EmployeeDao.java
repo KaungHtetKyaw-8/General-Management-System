@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeDao extends JpaRepository<Employee, Integer> {
@@ -18,7 +19,7 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 
     List<Employee> findTop5ByOrderByEmploymentDateDesc();
 
-    Employee findById(Long id);
+    Optional<Employee> findById(Long id);
 
     @Query("SELECT e FROM Employee e WHERE " +
             "CAST(e.id AS string) LIKE :keyword OR " +

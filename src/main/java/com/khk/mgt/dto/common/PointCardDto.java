@@ -16,15 +16,15 @@ import java.sql.Date;
 @ValidPointCardForCustomer(groups = {OnUpdate.class, OnDelete.class})
 public class PointCardDto {
 
-    @NotNull(message = "Customer ID must not null", groups = {OnCreate.class, OnUpdate.class, OnDelete.class})
-    @CustomerId(groups = {OnCreate.class, OnUpdate.class, OnDelete.class})
+    @NotNull(message = "{input.field.validation.pointcard.customer.id.notblank}", groups = {OnCreate.class, OnUpdate.class, OnDelete.class})
+    @CustomerId(message = "{input.field.validation.pointcard.customer.id.notfound}", groups = {OnCreate.class, OnUpdate.class, OnDelete.class})
     private Long customerId;
 
-    @NotNull(message = "Point Card Category must not null", groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(message = "{input.field.validation.pointcard.category.type.notblank}", groups = {OnCreate.class, OnUpdate.class})
     private Long pointCardCategory;
 
-    @NotNull(message = "Point Card ID must not null",groups = {OnUpdate.class,OnDelete.class})
-    @PointCardId(groups = {OnUpdate.class,OnDelete.class})
+    @NotNull(message = "{input.field.validation.pointcard.id.notblank}",groups = {OnUpdate.class,OnDelete.class})
+    @PointCardId(message = "{input.field.validation.pointcard.id.notfound}", groups = {OnUpdate.class,OnDelete.class})
     private Long pointCardId;
 
     private String firstName;

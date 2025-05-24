@@ -14,7 +14,7 @@ public class ProductCategoryDto {
 
     private Long id;
 
-    @NotBlank(message = "Category Name must not be blank",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.product.category.name.notblank}",groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
     private Long count;

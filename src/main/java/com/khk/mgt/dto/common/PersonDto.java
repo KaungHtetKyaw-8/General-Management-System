@@ -23,25 +23,25 @@ public class PersonDto {
 
     private Long id;
 
-    @NotBlank(message = "FirstName must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.person.firstname}",groups = {OnCreate.class, OnUpdate.class})
     private String firstName;
 
-    @NotBlank(message = "LastName must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.person.lastname}",groups = {OnCreate.class, OnUpdate.class})
     private String lastName;
 
-    @NotBlank(message = "Gender must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.person.gender}",groups = {OnCreate.class, OnUpdate.class})
     private String gender;
 
-    @NotNull(message = "Date OF Birth must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(message = "{input.field.validation.person.dob}",groups = {OnCreate.class, OnUpdate.class})
     @Past
     private Date dateOfBirth;
 
-    @Email(message = "Invalid email address.",groups = {OnCreate.class, OnUpdate.class})
-    @NotBlank(message = "Email must not blank.",groups = {OnCreate.class, OnUpdate.class})
+    @Email(message = "{input.field.validation.person.email.invalid}",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.person.email.notblank}",groups = {OnCreate.class, OnUpdate.class})
     @UniqueMail(groups = {OnCreate.class})
     private String email;
 
-    @NotBlank(message = "Phone must not blank.")
+    @NotBlank(message = "{input.field.validation.person.phonenumber}")
     @UniquePhone(groups = {OnCreate.class})
     private String phone;
 

@@ -21,9 +21,9 @@ public class OrderDto {
     @NotNull
     private List<OrderDetailDto> itemList;
 
-    @CustomerId
+    @CustomerId(message = "{input.field.validation.order.customer.id.notfound}")
     private Long customerId;
-    @PointCardId
+    @PointCardId(message = "{input.field.validation.order.pointcard.id.notfound}")
     private Long pointCardId;
 
     public OrderDto() {

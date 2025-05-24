@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class VendorDto extends PersonDto {
 
-    @NotBlank(message = "Company Name must not be blank",groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(message = "{input.field.validation.vendor.company.name.notblank}",groups = {OnCreate.class, OnUpdate.class})
     private String companyName;
 
     public VendorDto() {

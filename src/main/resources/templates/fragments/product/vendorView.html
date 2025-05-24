@@ -16,6 +16,19 @@
                  class="col-12 overflow-auto">
             </div>
         </div>
+
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFail}?'show'">
+            <span th:text="#{header.inventory.vendor.alert.search.notfound}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade"
+             role="alert"
+             th:classappend="${viewFailForNumber}?'show'">
+            <span th:text="#{header.inventory.vendor.alert.search.mustnumber}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
 </body>
 </html>

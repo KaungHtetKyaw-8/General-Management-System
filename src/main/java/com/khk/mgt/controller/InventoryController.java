@@ -102,7 +102,10 @@ public class InventoryController {
                 break;
             // By Product ID
             case "2" :
-                result.add(inventoryService.getInventoryById(queryId));
+                InventoryDto inventoryDto = inventoryService.getInventoryById(queryId);
+                if (inventoryDto != null) {
+                    result.add(inventoryDto);
+                }
                 break;
             // By Vendor ID
             case "3" :
@@ -116,7 +119,13 @@ public class InventoryController {
                 result = new ArrayList<>();
         }
 
-        model.addAttribute("viewInventoryDtoList", result);
+        if (result != null && !result.isEmpty()) {
+            model.addAttribute("viewInventoryDtoList", result);
+        }else{
+            model.addAttribute("viewInventoryDtoList", new ArrayList<PointCardDto>());
+            model.addAttribute("viewFail", true);
+        }
+
         return "inventoryIndex";
     }
 

@@ -13,27 +13,27 @@
                     align-middle
                     caption-top
                     mb-0 bg-gradient text-dark">
-                    <caption class="text-light"><h3>Orders</h3></caption>
+                    <caption class="text-light"><h3 th:text="#{header.pos.order.title}"></h3></caption>
                     <thead class="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th class="w-25" scope="col">Qty</th>
-                        <th class="w-25" scope="col">Price</th>
+                        <th scope="col" th:text="#{header.pos.order.table.product.name}"></th>
+                        <th class="w-25" scope="col" th:text="#{header.pos.order.table.product.qty}"></th>
+                        <th class="w-25" scope="col" th:text="#{header.pos.order.table.product.price}"></th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider" id="order-list">
                         <tr>
-                            <td colspan="4" class="text-center">No Order</td>
+                            <td colspan="4" class="text-center" th:text="#{header.pos.order.table.noorder}">No Order</td>
                         </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th colspan="3" scope="col" class="text-end fs-5 fw-bold">Tax :</th>
+                        <th colspan="3" scope="col" class="text-end fs-5 fw-bold" th:text="#{header.pos.order.table.tax}"></th>
                         <td>0.0</td>
                     </tr>
                     <tr>
-                        <th colspan="3" scope="col" class="text-end fs-5 fw-bold">Total :</th>
+                        <th colspan="3" scope="col" class="text-end fs-5 fw-bold" th:text="#{header.pos.order.table.total}"></th>
                         <td>0.0</td>
                     </tr>
                     </tfoot>
@@ -43,16 +43,16 @@
             <div class="col-12 col-md-9 align-self-start">
                 <div class="row">
                     <div class="col-12 col-md-8 mt-sm-3 overflow-auto" style="max-height: 60vh">
-                        <h3 class="my-2">Item List</h3>
-                        <div class="w-100 text-center my-auto d-block">
-                            please select the category
+                        <h3 class="my-2" th:text="#{header.pos.product.title}"></h3>
+                        <div class="w-100 text-center my-auto d-block" th:text="#{header.pos.product.nodata}">
+
                         </div>
                         <ol class="list-group list-group-numbered" id="item-list">
                         </ol>
                     </div>
 
                     <div class="col-12 col-md-4 mt-sm-3 vstack gap-1 overflow-auto" style="max-height: 60vh">
-                        <h3 class="my-2">Category</h3>
+                        <h3 class="my-2" th:text="#{header.pos.category.title}"></h3>
                         <div  th:each="item : ${productCategories}">
                             <button type="button" class="btn btn-outline-primary w-100 category-selection"
                                     th:data-url="@{'/api/product/category/' + ${item.id}} "
@@ -65,23 +65,24 @@
                 </div>
             </div>
             <div class="col-12 col-md-3 mt-sm-3 mt-md-4 ">
-                <label>Product ID</label>
+                <label th:text="#{header.pos.input.product.id}"></label>
                 <input type="text"
                        class="form-control mb-2 only-number-input"
                        id="productID"
                        th:data-url="@{/api/product/item}"
-                       autocomplete="off"
+                       th:autocomplete="#{autocomplete.status}"
                        autofocus>
-                <label>Product Name</label>
+                <label th:text="#{header.pos.input.product.name}"></label>
                 <input type="text"
                        class="form-control mb-2"
                        id="productName"
                        readonly
+                       disabled
                        tabindex="-1">
-                <label>Qty</label>
+                <label th:text="#{header.pos.input.product.qty}"></label>
                 <input type="text"
                        class="form-control mb-2 only-number-input"
-                       autocomplete="off"
+                       th:autocomplete="#{autocomplete.status}"
                        id="productQty">
             </div>
             <div class="col-12 col-md-3 align-self-center mt-md-4 mt-sm-3">
@@ -102,30 +103,30 @@
                 </div>
             </div>
             <div class="col-12 col-md-3 mt-md-4 mt-sm-3">
-                <label>Customer ID</label>
+                <label th:text="#{header.pos.input.customer.id}"></label>
                 <input type="text"
                        class="form-control mb-2 only-number-input"
                        th:data-url="@{/api/point/card/customer}"
                        th:field="*{customerId}"
-                       autocomplete="off">
+                       th:autocomplete="#{autocomplete.status}">
                 <label>PointCard Type</label>
                 <select type="text"
                         class="form-select mb-2"
                         id="pointCardType">
-                    <option value="" selected disabled>No Point Card</option>
+                    <option value="" selected disabled th:text="#{header.pos.input.customer.card.type.nodata}"></option>
                 </select>
-                <label>Point Card ID</label>
+                <label th:text="#{header.pos.input.customer.card.id}"></label>
                 <input type="text"
                        class="form-control mb-2 only-number-input"
                        th:data-url="@{/api/point/card}"
                        th:field="*{pointCardId}"
-                       autocomplete="off">
+                       th:autocomplete="#{autocomplete.status}">
             </div>
             <div class="col-12 col-md-3 align-self-center mt-md-4 mt-sm-3">
                 <div class="vstack gap-3">
-                    <button type="button" class="btn btn-primary py-2 w-100" id="orderReset">Reset</button>
-                    <button type="button" class="btn btn-primary py-2 w-100" id="orderAdd" th:data-url="@{/api/product/item}">Add Order</button>
-                    <button type="submit" class="btn btn-primary py-2 w-100" name="submit" value="submit">Save</button>
+                    <button type="button" class="btn btn-primary py-2 w-100" id="orderReset" th:text="#{header.pos.button.reset}"></button>
+                    <button type="button" class="btn btn-primary py-2 w-100" id="orderAdd" th:data-url="@{/api/product/item}" th:text="#{header.pos.button.order.add}"></button>
+                    <button type="submit" class="btn btn-primary py-2 w-100" name="submit" value="submit" th:text="#{header.pos.button.order.save}"></button>
                 </div>
             </div>
         </div>

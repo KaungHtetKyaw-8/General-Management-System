@@ -82,13 +82,21 @@ public class ProductCategoryController {
                 break;
             // By Category ID
             case "2" :
-                result.add(productCategoryService.getProductCategoryDtoById(queryId));
+                ProductCategoryDto productCategoryDto = productCategoryService.getProductCategoryDtoById(queryId);
+                if (productCategoryDto != null) {
+                    result.add(productCategoryDto);
+                }
                 break;
             default:
                 result = new ArrayList<>();
         }
 
-        model.addAttribute("viewCategoryDtoList", result);
+        if (result != null && !result.isEmpty()) {
+            model.addAttribute("viewCategoryDtoList", result);
+        }else{
+            model.addAttribute("viewCategoryDtoList", new ArrayList<PointCardDto>());
+            model.addAttribute("viewFail", true);
+        }
         return "inventoryIndex";
     }
 

@@ -82,13 +82,22 @@ public class VendorController {
                 break;
             // By Point Card ID
             case "2" :
-                result.add(vendorService.getVendorById(queryId));
+                VendorDto vendorDto = vendorService.getVendorById(queryId);
+                if (vendorDto != null) {
+                    result.add(vendorDto);
+                }
                 break;
             default:
                 result = new ArrayList<>();
         }
 
-        model.addAttribute("viewVendorDtoList", result);
+        if (result != null && !result.isEmpty()) {
+            model.addAttribute("viewVendorDtoList", result);
+        }else{
+            model.addAttribute("viewVendorDtoList", new ArrayList<PointCardDto>());
+            model.addAttribute("viewFail", true);
+        }
+
         return "inventoryIndex";
     }
 

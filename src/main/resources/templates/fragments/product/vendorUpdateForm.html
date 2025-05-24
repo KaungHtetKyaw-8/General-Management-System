@@ -5,19 +5,19 @@
     <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
          role="alert"
          th:classappend="${updateSuccess}?'show'">
-      <span>Update Complete!</span>
+      <span th:text="#{header.inventory.vendor.alert.update.complete}"></span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
          role="alert"
          th:classappend="${updateFail}?'show'">
-      <span>Update Fail!</span>
+      <span th:text="#{header.inventory.vendor.alert.update.fail}"></span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
          role="alert"
          th:classappend="${updateSearchNotFound}?'show'">
-      <span>Update Vendor Not Found!</span>
+      <span th:text="#{header.inventory.vendor.alert.update.notfound}"></span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <h2 class="text-center py-md-4 py-sm-5" th:text="#{header.inventory.vendor.sub.update}"></h2>

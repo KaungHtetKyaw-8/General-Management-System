@@ -93,13 +93,16 @@ public class PointCardController {
                 break;
             // By Point Card ID
             case "2" :
-                result.add(pointCardService.getPointCardById(queryId));
+                PointCardDto dto = pointCardService.getPointCardById(queryId);
+                if (dto != null) {
+                    result.add(dto);
+                }
                 break;
             default:
                 result = new ArrayList<>();
         }
 
-        if (!result.isEmpty()) {
+        if (result != null && !result.isEmpty()) {
             model.addAttribute("viewPointCardDtoList", result);
         }else{
             model.addAttribute("viewPointCardDtoList", new ArrayList<PointCardDto>());

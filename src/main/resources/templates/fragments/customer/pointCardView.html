@@ -3,7 +3,7 @@
 <body>
     <div th:fragment="pointCardView"
          class="container-fluid">
-        <h3 class="my-3">Point Card View</h3>
+        <h3 class="my-3" th:text="#{header.customer.pointcard.sub.view}"></h3>
         <div class="row">
             <form th:insert="~{fragments/customer/pointCardViewSearchForm.html :: viewPointCardSearchForm }"
                   th:action="@{/customer/point/viewsearch}"

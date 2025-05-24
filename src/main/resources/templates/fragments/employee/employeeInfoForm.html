@@ -5,7 +5,7 @@
 
 <!--				Employment Info-->
 <div th:fragment="employeeInfoForm">
-  <h5 class="my-2 text-center" th:text="#{header.employee.sub}">Employment Info</h5>
+  <h5 class="my-2 text-center" th:text="#{header.employee.form.sub}"></h5>
   <div class="row row-cols-1 row-cols-md-2">
     <div class="col">
       <div class="mb-3 my-3">
@@ -81,8 +81,8 @@
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <button type="button" class="btn btn-primary form-prev-btn">Previous</button>
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    <button type="button" class="btn btn-primary form-prev-btn" th:text="#{header.button.previous}"></button>
+    <button type="submit" class="btn btn-primary" name="submit" th:text="#{header.button.submit}"></button>
   </div>
 </div>
 

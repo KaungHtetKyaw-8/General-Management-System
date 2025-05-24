@@ -3,7 +3,7 @@
 <body>
     <div th:fragment="cateogryView"
          class="container-fluid">
-        <h3 class="my-3">Product Category View</h3>
+        <h3 class="my-3" th:text="#{header.inventory.product.category.sub.view}"></h3>
         <div class="row">
             <form th:insert="~{fragments/product/categoryViewSearchForm.html :: viewCategorySearchForm}"
                   th:action="@{/category/viewsearch}"

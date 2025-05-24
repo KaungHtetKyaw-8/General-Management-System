@@ -3,7 +3,7 @@
 <body>
     <div th:fragment="inventoryView"
          class="container-fluid">
-        <h3 class="my-3">Inventory Products View</h3>
+        <h3 class="my-3" th:text="#{header.inventory.product.sub.view}"></h3>
         <div class="row">
             <form th:insert="~{fragments/product/inventoryViewSearchForm.html :: viewInventorySearchForm}"
                   th:action="@{/inventory/viewsearch}"

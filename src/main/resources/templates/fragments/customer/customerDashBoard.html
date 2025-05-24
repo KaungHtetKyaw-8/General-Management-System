@@ -10,7 +10,7 @@
             <div class="chart-container"
                  id="char1"
                  th:data-url="@{/api/customer/chart/gender}"
-                 data-name="Gender Group"
+                 th:data-name="#{header.customer.dashboard.chart.sub1}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -19,7 +19,7 @@
             <div class="chart-container"
                  id="char2"
                  th:data-url="@{/api/customer/chart/age}"
-                 data-name="Age Range Group"
+                 th:data-name="#{header.customer.dashboard.chart.sub2}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -28,7 +28,7 @@
             <div class="chart-container"
                  id="char3"
                  th:data-url="@{/api/customer/chart/categorisation}"
-                 data-name="Card Category Group"
+                 th:data-name="#{header.customer.dashboard.chart.sub3}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -37,7 +37,7 @@
             <div class="chart-container"
                  id="char4"
                  th:data-url="@{/api/customer/chart/points}"
-                 data-name="Customer Point Group"
+                 th:data-name="#{header.customer.dashboard.chart.sub4}"
                  data-charttype="bar">
                 <canvas></canvas>
             </div>

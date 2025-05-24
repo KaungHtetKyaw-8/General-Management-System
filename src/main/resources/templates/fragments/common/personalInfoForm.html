@@ -5,7 +5,7 @@
 
 <!--				Personal Form-->
 <div th:fragment="personalInfoForm">
-    <h5 class="my-2 text-center" th:text="#{header.person.sub}"></h5>
+    <h5 class="my-2 text-center" th:text="#{header.person.form.sub}"></h5>
     <div class="row row-cols-1 row-cols-md-2">
         <div class="col">
             <div class="mb-3 my-3">
@@ -47,7 +47,8 @@
                        th:for="${'email'}"
                        th:text="#{header.person.email}"></label>
                 <input type="email" class="form-control"
-                       th:field="*{email}" placeholder="eg. example@mail.com"
+                       th:field="*{email}"
+                       th:placeholder="#{header.person.email.placeholder}"
                        th:autocomplete="#{autocomplete.status}"
                        th:classappend="${#fields.hasErrors('email')} ? 'form-control-invalid' : ''">
                 <div class="invalid-feedback"
@@ -119,7 +120,7 @@
         </div>
     </div>
     <div class="d-flex my-3 justify-content-end">
-        <button type="button" class="btn btn-primary form-next-btn">Next</button>
+        <button type="button" class="btn btn-primary form-next-btn" th:text="#{header.button.next}">Next</button>
     </div>
 </div>
 

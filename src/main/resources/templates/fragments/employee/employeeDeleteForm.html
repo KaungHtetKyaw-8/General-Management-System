@@ -21,7 +21,7 @@
       <span>Delete Employee Not Found!</span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <h2 class="text-center py-md-4 py-sm-5">Employee Delete</h2>
+    <h2 class="text-center py-md-4 py-sm-5" th:text="#{header.employee.sub.delete}"></h2>
 
     <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
       <div th:insert="~{fragments/employee/emloyeeViewSearchForm.html :: viewEmployeeSearchForm}" class="col-10 col-lg-8"></div>

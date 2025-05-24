@@ -16,6 +16,7 @@
                class="form-label"></label>
         <input type="text" class="form-control"
                th:field="*{name}"
+               th:placeholder="#{header.inventory.product.category.name}"
                th:autocomplete="#{autocomplete.status}"
                th:classappend="${#fields.hasErrors('name')} ? 'form-control-invalid' : ''">
         <div class="invalid-feedback"
@@ -28,7 +29,7 @@
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    <button type="submit" class="btn btn-primary" name="submit" th:text="#{header.button.submit}"></button>
   </div>
 </div>
 

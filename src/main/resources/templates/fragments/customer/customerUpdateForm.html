@@ -21,7 +21,7 @@
       <span>Update Customer Not Found!</span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <h2 class="text-center py-md-4 py-sm-5">Customer Update</h2>
+    <h2 class="text-center py-md-4 py-sm-5" th:text="#{header.customer.sub.update}">Customer Update</h2>
 
     <div class="row justify-content-center align-items-sm-center align-items-md-start h-auto">
       <div th:insert="~{fragments/customer/customerViewSearchForm.html :: viewCustomerSearchForm}" class="col-10 col-lg-8"></div>

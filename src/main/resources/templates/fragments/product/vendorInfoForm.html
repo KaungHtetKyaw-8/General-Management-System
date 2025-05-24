@@ -5,14 +5,16 @@
 
 <!--				Vendor Info-->
 <div th:fragment="vendorInfoForm">
-  <h5 class="my-2 text-center" th:text="#{header.product.vendor.sub}"></h5>
+  <h5 class="my-2 text-center" th:text="#{header.inventory.vendor.sub}"></h5>
   <div class="row row-cols-1">
     <div class="col">
       <div class="mb-3 my-3">
         <label th:for="${companyName}"
-               th:text="#{header.product.vendor.companyName}"
+               th:text="#{header.inventory.product.company}"
                class="form-label"></label>
         <input type="text" class="form-control"
+               th:placeholder="#{header.inventory.product.company}"
+               th:autocomplete="#{autocomplete.status}"
                th:field="*{companyName}"
                th:classappend="${#fields.hasErrors('companyName')} ? 'form-control-invalid' : ''">
         <div class="invalid-feedback"
@@ -24,8 +26,8 @@
   </div>
 
   <div class="d-flex justify-content-end gap-2">
-    <button type="button" class="btn btn-primary form-prev-btn">Previous</button>
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    <button type="button" class="btn btn-primary form-prev-btn" th:text="#{header.button.previous}"></button>
+    <button type="submit" class="btn btn-primary" name="submit" th:text="#{header.button.submit}"></button>
   </div>
 </div>
 

@@ -3,7 +3,7 @@
 <body>
     <div th:fragment="employeeView"
          class="container-fluid">
-        <h3 class="my-3">Employee View</h3>
+        <h3 class="my-3" th:text="#{header.employee.sub.view}"></h3>
         <div class="row">
             <form th:insert="~{fragments/employee/emloyeeViewSearchForm.html :: viewEmployeeSearchForm}"
                   th:action="@{/employees/viewsearch}"

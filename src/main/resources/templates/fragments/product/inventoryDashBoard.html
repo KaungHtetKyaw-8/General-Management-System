@@ -6,7 +6,7 @@
             <div class="chart-container"
                  id="char1"
                  th:data-url="@{/api/inventory/chart/vendor/gender}"
-                 data-name="Vendor Gender Group"
+                 th:data-name="#{header.inventory.dashboard.chart.sub1}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -15,7 +15,7 @@
             <div class="chart-container"
                  id="char2"
                  th:data-url="@{/api/inventory/chart/vendor}"
-                 data-name="Product By Vendor Group"
+                 th:data-name="#{header.inventory.dashboard.chart.sub2}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -24,7 +24,7 @@
             <div class="chart-container"
                  id="char3"
                  th:data-url="@{/api/inventory/chart/company}"
-                 data-name="Product By Company Group"
+                 th:data-name="#{header.inventory.dashboard.chart.sub3}"
                  data-charttype="doughnut">
                 <canvas></canvas>
             </div>
@@ -33,7 +33,7 @@
             <div class="chart-container"
                  id="char4"
                  th:data-url="@{/api/inventory/chart/price}"
-                 data-name="Price Range Group"
+                 th:data-name="#{header.inventory.dashboard.chart.sub4}"
                  data-charttype="bar">
                 <canvas></canvas>
             </div>

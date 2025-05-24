@@ -10,6 +10,18 @@
         <span></span>
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
+    <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade show"
+         th:if="${orderConfirmed}"
+         role="alert">
+        <span th:text="#{header.pos.alert.order.sent}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25 alert-dismissible fade show"
+         th:if="${orderFail}"
+         role="alert">
+        <span th:text="#{header.pos.alert.order.fail}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 </main>
 
 </body>

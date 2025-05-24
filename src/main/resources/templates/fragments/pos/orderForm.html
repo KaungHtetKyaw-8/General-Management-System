@@ -109,6 +109,10 @@
                        th:data-url="@{/api/point/card/customer}"
                        th:field="*{customerId}"
                        th:autocomplete="#{autocomplete.status}">
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('customerId')}"
+                     th:errors="*{customerId}">
+                </div>
                 <label>PointCard Type</label>
                 <select type="text"
                         class="form-select mb-2"
@@ -121,6 +125,10 @@
                        th:data-url="@{/api/point/card}"
                        th:field="*{pointCardId}"
                        th:autocomplete="#{autocomplete.status}">
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('pointCardId')}"
+                     th:errors="*{pointCardId}">
+                </div>
             </div>
             <div class="col-12 col-md-3 align-self-center mt-md-4 mt-sm-3">
                 <div class="vstack gap-3">

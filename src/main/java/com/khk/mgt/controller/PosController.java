@@ -37,14 +37,14 @@ public class PosController {
         if (bindingResult.hasErrors()) {
             // process the form error
             System.out.println("Binding Errors : " + bindingResult.getAllErrors());
-            model.addAttribute("registerFail", true);
+            model.addAttribute("orderFail", true);
             return "posIndex";
         }else{
             // process the form submission
             orderService.saveOrder(orderDto);
-            model.addAttribute("registerSuccess", true);
+            model.addAttribute("orderConfirmed", true);
             model.addAttribute("addCategoryDto", new ProductCategoryDto());
-            return "redirect:/pos";
+            return "posIndex";
         }
     }
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="ordersDashBoard" class="row">
+        <div class="col-12 col-lg-4">
+            <div class="chart-container"
+                 id="char1"
+                 th:data-url="@{/api/order/chart/customer}"
+                 th:data-name="#{header.orders.dashboard.chart.sub1}"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+            <div class="chart-container"
+                 id="char2"
+                 th:data-url="@{/api/order/chart/product}"
+                 th:data-name="#{header.orders.dashboard.chart.sub2}"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+            <div class="chart-container"
+                 id="char3"
+                 th:data-url="@{/api/order/chart/category}"
+                 th:data-name="#{header.orders.dashboard.chart.sub3}"
+                 data-charttype="doughnut">
+                <canvas></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 mt-5 mt-lg-0" style="height: 300px">
+            <div class="chart-container"
+                 id="char4"
+                 th:data-url="@{/api/order/chart/orderdate}"
+                 th:data-name="#{header.orders.dashboard.chart.sub4}"
+                 data-charttype="bar">
+                <canvas></canvas>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 pt-md-0 pt-lg-3 mt-5">
+            <h4 th:text="#{header.orders.dashboard.sub}"></h4>
+            <table class="table-style w-100 view-table">
+                <thead>
+                    <tr class="w-100">
+                        <th th:text="#{header.orders.table.product.name}"></th>
+                        <th th:text="#{header.orders.table.product.qty}"></th>
+                        <th th:text="#{header.orders.table.orders.date}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${dashBoardOrders}">
+                        <td th:text="${item.group}"></td>
+                        <td th:text="${item.value}"></td>
+                        <td th:text="${item.label}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

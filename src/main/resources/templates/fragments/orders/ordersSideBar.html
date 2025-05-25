@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:fragment="sideBar" class="d-flex flex-column flex-shrink-0 bg-gradient vh-100 position-sticky top-0" style="width: 300px">
+        <a href="#" class="d-block p-3 text-white text-decoration-none">
+            <i class="bi bi-basket fs-4 me-2"></i>
+            <Span class="fs-5" th:text="#{header.navbar.orders.title}"></Span>
+        </a>
+        <ul class="nav nav-pills d-flex flex-column flex-nowrap mb-auto text-start overflow-auto accordion" id="nav-accordion">
+            <li class="nav-item">
+                <a th:href="@{/orders(nav=${'dashBoard'})}"
+                   th:classappend="${navStatus == 'dashBoard'}? 'active':''"
+                   class="nav-link py-3 text-white border-bottom"
+                   aria-current="page"
+                   title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   data-bs-title="Dashboard">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    <span th:text="#{header.navbar.sub.title.dashboard}">Dashboard</span>
+                </a>
+            </li>
+
+<!--         Order Nav -->
+            <li class="nav-item">
+                <a th:href="@{/orders(nav=${'ordersView'})}"
+                   th:classappend="${navStatus == 'ordersView'}? 'active':''"
+                   class="nav-link py-3 text-white border-bottom"
+                   aria-current="page"
+                   title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   data-bs-title="">
+                    <i class="bi bi-binoculars me-2"></i>
+                    <span th:text="#{header.navbar.sub.title.view}">View</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/orders(nav=${'ordersDelete'})}"
+                   th:classappend="${navStatus == 'ordersDelete'}? 'active':''"
+                   class="nav-link py-3 text-white border-bottom"
+                   aria-current="page"
+                   title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   data-bs-title="">
+                    <i class="bi bi-cart-dash me-2"></i>
+                    <span th:text="#{header.navbar.sub.title.remove}">Remove</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/pos}"
+                   class="nav-link py-3 text-white border-bottom"
+                   target="_blank"
+                   aria-current="page"
+                   title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right"
+                   data-bs-title="">
+                    <i class="bi bi-cart3"></i>
+                    <span th:text="#{header.navbar.sub.title.pos}">Remove</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="dropdown border-top">
+            <a href="#" class="d-flex align-items-center  p-3 link-light text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="true">
+                <img th:src="@{/assets/img/smiling-man.jpg}" alt="mdo" width="25" height="25" class="rounded-circle me-2">
+                <strong>Tester</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3" data-popper-placement="top-start" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -58.4px, 0px);">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

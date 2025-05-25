@@ -14,12 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeDao extends JpaRepository<Employee, Integer> {
+public interface EmployeeDao extends JpaRepository<Employee, Long> {
     boolean existsByEmail(String email);
 
     List<Employee> findTop5ByOrderByEmploymentDateDesc();
-
-    Optional<Employee> findById(Long id);
 
     @Query("SELECT e FROM Employee e WHERE " +
             "CAST(e.id AS string) LIKE :keyword OR " +
@@ -48,5 +46,4 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
     @Query("SELECT e.dateOfBirth FROM Employee e WHERE e.dateOfBirth IS NOT NULL")
     List<Date> findAllDateOfBirth();
 
-    void deleteById(Long id);
 }

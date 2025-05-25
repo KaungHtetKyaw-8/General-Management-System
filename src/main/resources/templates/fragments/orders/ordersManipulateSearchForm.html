@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="manipulateOrdersSearchForm" class="input-group mb-3">
+        <input th:value="*{value}"
+               th:autocomplete="#{autocomplete.status}"
+               th:field="*{value}"
+               type="text" class="form-control"
+               th:placeholder="#{header.search.title}">
+        <select class="btn btn-primary" th:field="*{searchType}">
+            <option class="bg-light text-dark" value="1" th:text="#{header.search.orders.sub2}"></option>
+        </select>
+        <button class="btn btn-primary" type="submit" name="search">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </span>
+            <span th:text="#{header.search.title}"></span>
+        </button>
+
+        <div class="invalid-feedback"
+             th:if="${#fields.hasErrors('value')}"
+             th:errors="*{value}">
+        </div>
+    </div>
+</body>
+</html>

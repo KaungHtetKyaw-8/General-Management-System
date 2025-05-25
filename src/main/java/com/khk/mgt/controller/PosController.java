@@ -3,7 +3,6 @@ package com.khk.mgt.controller;
 import com.khk.mgt.dto.common.*;
 import com.khk.mgt.service.OrderService;
 import com.khk.mgt.service.ProductCategoryService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +24,13 @@ public class PosController {
 
     @GetMapping({"","/","home","index"})
     public String index(Model model) {
-        model.addAttribute("orderDto", new OrderDto());
+        model.addAttribute("orderDto", new PosOrderDto());
         model.addAttribute("productCategories", productCategoryService.getAllProductCategories());
         return "posIndex";
     }
 
     @PostMapping(value = "/save",params = "submit")
-    public String vendorAdd(@Validated @ModelAttribute("orderDto") OrderDto orderDto, BindingResult bindingResult, Model model) {
+    public String vendorAdd(@Validated @ModelAttribute("orderDto") PosOrderDto posOrderDto, BindingResult bindingResult, Model model) {
         model.addAttribute("productCategories", productCategoryService.getAllProductCategories());
 
         if (bindingResult.hasErrors()) {
@@ -41,9 +40,8 @@ public class PosController {
             return "posIndex";
         }else{
             // process the form submission
-            orderService.saveOrder(orderDto);
+            orderService.saveOrder(posOrderDto);
             model.addAttribute("orderConfirmed", true);
-            model.addAttribute("addCategoryDto", new ProductCategoryDto());
             return "posIndex";
         }
     }

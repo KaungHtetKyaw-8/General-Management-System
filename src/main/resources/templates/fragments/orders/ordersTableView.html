@@ -1,0 +1,34 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="viewOrdersTable" class="table-style view-table">
+        <thead>
+            <tr>
+                <th th:text="#{header.orders.table.id}" class="text-nowrap"></th>
+                <th th:text="#{header.orders.table.customer.name}" class="text-nowrap"></th>
+                <th th:text="#{header.orders.table.orders.date}" class="text-nowrap"></th>
+                <th th:text="#{header.orders.table.product.name}" class="text-nowrap"></th>
+                <th th:text="#{header.orders.table.product.qty}" class="text-nowrap"></th>
+                <th th:text="#{header.orders.table.product.price}" class="text-nowrap"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${viewOrdersListDto == null or viewOrdersListDto.isEmpty()}">
+                No Data
+            </tr>
+
+            <th:block th:each="data : ${viewOrdersListDto}">
+                <tr th:each="item : ${data.itemList}">
+                    <td th:text="${data.orderId}"></td>
+                    <td th:text="${data.customerName}"></td>
+                    <td th:text="${data.orderDate}"></td>
+
+                    <td th:text="${item.productName}"></td>
+                    <td th:text="${item.productQty}"></td>
+                    <td th:text="${item.productPrice}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>

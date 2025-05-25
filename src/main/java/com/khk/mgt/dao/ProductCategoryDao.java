@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ProductCategoryDao extends JpaRepository<ProductCategory, Long> {
 
-    @Query("SELECT new com.khk.mgt.dto.common.ProductCategoryDto(pc.name,COUNT(p),SUM(p.buyPrice)) FROM Product p JOIN p.category pc GROUP BY p.category")
+    @Query("SELECT new com.khk.mgt.dto.common.ProductCategoryDto(pc.name,COUNT(p),SUM(p.buyPrice * p.count)) FROM Product p JOIN p.category pc GROUP BY p.category")
     List<ProductCategoryDto> getCategoryDtoByProductCountAndTotalPrice();
 }

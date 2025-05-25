@@ -11,11 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VendorDao extends JpaRepository<Vendor, Integer> {
+public interface VendorDao extends JpaRepository<Vendor, Long> {
 
-    Optional<Vendor> findById(Long id);
-
-    void deleteById(Long id);
 
     List<Vendor> findByCompanyName(String companyName);
 

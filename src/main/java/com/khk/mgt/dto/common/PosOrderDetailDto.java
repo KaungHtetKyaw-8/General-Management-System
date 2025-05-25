@@ -11,14 +11,13 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class OrderDetailDto {
+public class PosOrderDetailDto {
 
-
+    @NotNull
     private long productId;
-    private String productName;
+    @NotNull
     private long productQty;
-    private double productPrice;
 
-    public OrderDetailDto() {
+    public PosOrderDetailDto() {
     }
 }

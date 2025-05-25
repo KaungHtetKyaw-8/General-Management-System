@@ -22,7 +22,7 @@ public class Orders {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "orders",cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<SellDetail> sellDetail = new ArrayList<SellDetail>();
 
     private Date orderDate;

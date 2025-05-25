@@ -9,23 +9,22 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
-public class OrderDto {
+public class PosOrderDto {
 
-    private List<OrderDetailDto> itemList;
+    @NotNull
+    private List<PosOrderDetailDto> itemList;
 
-    private Long orderId;
+    @CustomerId(message = "{input.field.validation.order.customer.id.notfound}")
+    private Long customerId;
+    @PointCardId(message = "{input.field.validation.order.pointcard.id.notfound}")
+    private Long pointCardId;
 
-    private String customerName;
-    private Date orderDate;
-
-
-    public OrderDto() {
+    public PosOrderDto() {
     }
 }

@@ -1,12 +1,16 @@
 package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Employee extends Person{
 
     private Date employmentDate;

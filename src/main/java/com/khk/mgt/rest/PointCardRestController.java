@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/api/point/card")
-@CrossOrigin("*")
 public class PointCardRestController {
 
     @Autowired

@@ -3,7 +3,11 @@ package com.khk.mgt.service;
 
 import com.khk.mgt.dao.OrdersDao;
 import com.khk.mgt.ds.*;
+import com.khk.mgt.dto.chart.GroupedLabelValue;
+import com.khk.mgt.dto.chart.LabelValue;
 import com.khk.mgt.dto.common.OrderDto;
+import com.khk.mgt.dto.common.PosOrderDto;
+import com.khk.mgt.mapper.OrdersMapper;
 import com.khk.mgt.util.PointConvert;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -36,65 +44,99 @@ public class OrderService {
     @Autowired
     private EntityManager entityManager;
 
-    public void checkEntityState(Object entity) {
-        if (entityManager.contains(entity)) {
-            System.out.println("Entity is in managed state.");
-        } else {
-            System.out.println("Entity is NOT managed.");
+
+    public List<OrderDto> getLatest100orders() {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        List<Orders> ordersList = ordersDao.findTop100ByOrderByOrderDateDesc();
+
+        if (ordersList == null || ordersList.isEmpty()) {
+            return null;
         }
+
+        orderDtoList = ordersList.stream().map(OrdersMapper::toDto).collect(Collectors.toList());
+
+        orderDtoList.sort(
+                Comparator.comparing(OrderDto::getOrderDate,Comparator.reverseOrder())
+                        .thenComparing(OrderDto::getOrderId,Comparator.reverseOrder())
+        );
+
+        return orderDtoList;
     }
 
-//    public ProductCategory findProductCategoryById(Long id) {
-//        // Product Category find By ID
-//        return productCategoryDao.findById(id).orElse(null);
-//    }
-//
-//    public boolean isProductCategoryExist(Long id) {
-//        // Product Category exists or not by ID
-//        return productCategoryDao.findById(id).isPresent();
-//    }
-//
-//    public List<ProductCategory> findAllProductCategories() {
-//        // Retrieve the all Product Categories
-//        return productCategoryDao.findAll();
-//    }
-//
-//    public ProductCategoryDto getProductCategoryDtoById(Long id) {
-//        ProductCategory productCategory = findProductCategoryById(id);
-//
-//        if (productCategory == null) {
-//            return null;
-//        }
-//
-//        return new ProductCategoryDto(productCategory.getId(), productCategory.getName());
-//    }
-//
-//    public List<ProductCategoryDto> getAllProductCategories() {
-//        List<ProductCategory> productCategories = productCategoryDao.findAll();
-//
-//        if (productCategories.isEmpty()) {
-//            return null;
-//        }
-//
-//        // Retrieve the all Product Categories convert to Dto
-//        return productCategories
-//                .stream()
-//                .map(category -> new ProductCategoryDto(category.getId(),category.getName()))
-//                .collect(Collectors.toList());
-//    }
+    public OrderDto getOrdersByOrderId(Long id) {
+        Orders orders = ordersDao.findById(id).orElse(null);
+        if (orders == null) {
+            return null;
+        }
+        return OrdersMapper.toDto(orders);
+    }
 
-    public void saveOrder(OrderDto orderDto) {
+    public List<OrderDto> getOrdersByCustomerId(Long id) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        List<Orders> ordersList = ordersDao.findByCustomerId(id);
+
+        if (ordersList == null || ordersList.isEmpty()) {
+            return null;
+        }
+
+        orderDtoList = ordersList.stream().map(OrdersMapper::toDto).collect(Collectors.toList());
+
+        orderDtoList.sort(
+                Comparator.comparing(OrderDto::getOrderDate,Comparator.reverseOrder())
+                        .thenComparing(OrderDto::getOrderId,Comparator.reverseOrder())
+        );
+
+        return orderDtoList;
+    }
+
+    public List<GroupedLabelValue> getOrderDtoByRecentOrderedDate() {
+        LocalDate pastTwoDayLocalDate = LocalDate.now().minusDays(2);
+        List<GroupedLabelValue> ordersList = ordersDao.findOrdersByRecentOrderedDate(pastTwoDayLocalDate);
+        if (ordersList == null || ordersList.isEmpty()) {
+            return null;
+        }
+
+        return ordersList;
+    }
+
+    public List<LabelValue> getLabelValueByCustomer(){
+        List<LabelValue> result = ordersDao.findLabelValueByCustomer();
+        result.sort(Comparator.comparing(LabelValue::getValue));
+        return result;
+    }
+
+    public List<LabelValue> getLabelValueByProduct(){
+        List<LabelValue> result = ordersDao.findLabelValueByProduct();
+        result.sort(Comparator.comparing(LabelValue::getValue));
+        return result;
+    }
+
+    public List<LabelValue> getLabelValueByCategory(){
+        List<LabelValue> result = ordersDao.findLabelValueByCategory();
+        result.sort(Comparator.comparing(LabelValue::getValue));
+        return result;
+    }
+
+    public List<GroupedLabelValue> getOrdersByOrdersDate(){
+        LocalDate pastTwoDayLocalDate = LocalDate.now().minusDays(5);
+        List<GroupedLabelValue> result = ordersDao.findGroupedLabelValueByOrderDate(pastTwoDayLocalDate);
+        result.sort(Comparator.comparingLong(item -> item.getValue().longValue()));
+        return ordersDao.findGroupedLabelValueByOrderDate(pastTwoDayLocalDate);
+    }
+
+
+    public void saveOrder(PosOrderDto posOrderDto) {
         // Create New Orders
         Orders orders = new Orders();
 
         // Retrieve Customer Entity
         Customer customer;
-        if (orderDto.getCustomerId() == null && orderDto.getPointCardId() == null) {
+        if (posOrderDto.getCustomerId() == null && posOrderDto.getPointCardId() == null) {
             customer = customerService.findCustomerById(DUMMY_CUSTOMER_ID);
-        }else if (orderDto.getCustomerId() != null){
-            customer = customerService.findCustomerById(orderDto.getCustomerId());
+        }else if (posOrderDto.getCustomerId() != null){
+            customer = customerService.findCustomerById(posOrderDto.getCustomerId());
         }else{
-            customer = customerService.findCustomerByPointCardId(orderDto.getPointCardId());
+            customer = customerService.findCustomerByPointCardId(posOrderDto.getPointCardId());
         }
         // Added the customer For order
         orders.setCustomer(customer);
@@ -109,7 +151,7 @@ public class OrderService {
         PointConvert pointConvert = new PointConvert();
 
         // Order Detail List Create
-        orderDto.getItemList()
+        posOrderDto.getItemList()
                 .forEach(item -> {
                     // Create Dummy Sell Detail
                     SellDetail sellDetail = new SellDetail();
@@ -132,10 +174,24 @@ public class OrderService {
                     savedOrders.addSellDetail(sellDetail);
                 });
 
-        if (!customer.getId().equals(DUMMY_CUSTOMER_ID) && orderDto.getPointCardId() != null) {
-            pointCardService.updatePointCardCount(orderDto.getPointCardId(),pointConvert.getPoint());
+        if (!customer.getId().equals(DUMMY_CUSTOMER_ID) && posOrderDto.getPointCardId() != null) {
+            pointCardService.updatePointCardCount(posOrderDto.getPointCardId(),pointConvert.getPoint());
         }
 
+    }
+
+    public void deleteOrder(OrderDto orderDto) {
+        Orders orders = ordersDao.findById(orderDto.getOrderId()).orElse(null);
+        if (orders == null) {
+            return;
+        }
+
+        orders.getSellDetail().forEach(item -> {
+            // Inventory Item Re-fill
+            inventoryService.updateProductQtyAdjust(item.getProduct().getId(),item.getQuantity()*-1);
+        });
+
+        ordersDao.delete(orders);
     }
 
 

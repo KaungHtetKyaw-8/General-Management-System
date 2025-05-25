@@ -1,12 +1,16 @@
 package com.khk.mgt.ds;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Vendor extends Person {
 
     private String companyName;

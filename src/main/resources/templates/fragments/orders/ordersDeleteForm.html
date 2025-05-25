@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="ordersDeleteForm" class="container-fluid text-light" >
+    <div class="alert alert-success position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${deleteSuccess}?'show'">
+      <span th:text="#{header.orders.alert.delete.complete}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${deleteFail}?'show'">
+      <span th:text="#{header.orders.alert.delete.fail}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger position-absolute end-0 top-0 mt-3 me-3 w-25  alert-dismissible fade"
+         role="alert"
+         th:classappend="${deleteSearchNotFound}?'show'">
+      <span th:text="#{header.orders.alert.delete.notfound}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h2 class="text-center py-md-4 py-sm-5" th:text="#{header.orders.sub.delete}"></h2>
+
+    <div class="row justify-content-center align-items-center align-items-md-start h-auto">
+        <form class="d-flex justify-content-center align-items-center align-items-md-start h-auto"
+              th:action="@{/orders/delete}" th:object="${searchQuery}" method="post">
+            <div th:insert="~{fragments/orders/ordersManipulateSearchForm.html :: manipulateOrdersSearchForm}" class="col-10 col-lg-8"></div>
+        </form>
+
+        <form class="d-flex justify-content-center align-items-center align-items-md-start h-auto"
+              th:action="@{/orders/delete}" th:object="${deleteOrderDto}" method="post" id="multiForm">
+            <div th:insert="~{fragments/orders/ordersInfoForm.html :: ordersInfoForm}" class="col-11 col-md-10 col-lg-8"></div>
+
+            <!-- Hidden ID field -->
+            <input type="hidden" th:field="*{orderId}" />
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

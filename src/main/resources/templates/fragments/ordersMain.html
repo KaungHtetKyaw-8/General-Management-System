@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<main th:fragment="ordersMain" class="container-fluid px-0">
+    <div class="d-flex vh-100">
+        <!--        Side Bar Insert-->
+        <div th:insert="~{fragments/orders/ordersSideBar.html :: sideBar}"></div>
+        <!--        Main Section-->
+        <div class="main-content" th:switch="${navStatus}">
+            <div th:case="'dashBoard'" th:insert="~{fragments/orders/ordersDashBoard.html :: ordersDashBoard}" ></div>
+            <div th:case="'ordersView'" th:insert="~{fragments/orders/ordersView.html :: ordersView}"></div>
+            <div th:case="'ordersDelete'" th:insert="~{fragments/orders/ordersDeleteForm.html :: ordersDeleteForm}"></div>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>

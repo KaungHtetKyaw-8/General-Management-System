@@ -15,11 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CustomerDao extends JpaRepository<Customer,Integer> {
+public interface CustomerDao extends JpaRepository<Customer,Long> {
 
-    Optional<Customer> findById(Long id);
-
-    void deleteById(Long id);
 
     @Query("SELECT c FROM PointCard pc JOIN pc.customer c where pc.id = :id")
     Optional<Customer> findByPointCardId(@Param("id")Long pointCardId);

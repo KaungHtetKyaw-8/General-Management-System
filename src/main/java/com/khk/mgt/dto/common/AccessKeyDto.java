@@ -1,27 +1,25 @@
 package com.khk.mgt.dto.common;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 public class AccessKeyDto {
 
     private Long id;
 
-    private String hashedKey;
-
+    @NotBlank
+    private String userName;
+    @NotBlank
     private String secretKey;
 
-    private LocalDateTime accessedAt;
-
-    private String remoteIp;
+    private String hashedKey;
 
     private boolean active;
 }

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="passKeyForm" class="vh-100">
+    <h3 class="py-4 fs-3 text-center" th:text="#{header.security.key.form.title}"></h3>
+    <form method="post" action="/">
+         <div class="row justify-content-center align-items-center" style="height: 40vh">
+            <div class="col-6">
+                <label for="passKey"
+                       th:text="#{header.security.key.form.pass}"
+                       class="form-label"></label>
+                <div class="input-group">
+                    <input type="text" name="key"
+                           class="form-control"
+                           id="passKey"
+                           th:autocomplete="#{autocomplete.status}"
+                           th:placeholder="#{header.security.key.form.pass}"/>
+                    <button type="submit" class="btn btn-primary"
+                            th:text="#{header.security.key.form.btn}">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row justify-content-center align-items-center" style="height: 40vh">
+        <div class="col-6">
+            <div class="card bg-transparent text-white border-0">
+                <h3 class="card-header border-0" th:text="#{header.security.key.question.title}"></h3>
+                <div class="card-body">
+                    <p class="card-text" th:text="#{header.security.key.question.content}">
+                    </p>
+                    <div class="hstack gap-2">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mgkaunghtetkyaw8@gmail.com&su=Request For Pre-Shared Key&body=Dear Admin," target="_blank" class="btn btn-outline-secondary fs-4"><i class="bi bi-envelope-at"></i></a>
+                        <a href="https://www.linkedin.com/in/%E3%83%BB%E3%83%86%E3%83%83%E3%83%BB%E3%83%81%E3%83%A7%E3%82%A6-%E3%82%AB%E3%82%A6%E3%83%B3-2a9028285/" target="_blank" class="btn btn-outline-secondary fs-4"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://github.com/KaungHtetKyaw-8" target="_blank" class="btn btn-outline-secondary fs-4"><i class="bi bi-github"></i></a>
+                        <a href="https://line.me/ti/p/_ykILNpUnM" target="_blank" class="btn btn-outline-secondary fs-4"><i class="bi bi-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
